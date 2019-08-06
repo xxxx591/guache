@@ -1,0 +1,259 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+  min-width: 100vw;
+  height: 100%;
+}
+
+.flex-1 {
+  display: flex;
+  flex: 1;
+}
+
+.flex-h {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-v {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-bc {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.flex-cc {
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+button::after {
+  content: none;
+}
+
+button {
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
+}
+
+::selection {
+  background: none;
+}
+
+::-moz-selection {
+  background: none;
+}
+
+::-webkit-selection {
+  background: none;
+}
+
+video::-internal-media-controls-download-button {
+  display: none !important;
+}
+
+video::-webkit-media-controls-enclosure {
+  overflow: hidden;
+}
+
+video::-webkit-media-controls-panel {
+  width: calc(100%);
+}
+
+::-webkit-input-placeholder {
+  /* WebKit browsers */
+  color: #cccccc;
+  font-size: 32px;
+}
+
+::-moz-placeholder {
+  /* Mozilla Firefox 19+ */
+  color: #cccccc;
+  font-size: 32px;
+}
+
+:-ms-input-placeholder {
+  /* Internet Explorer 10+ */
+  color: #cccccc;
+  font-size: 32px;
+}
+
+* {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+#Loading {
+  top: 50%;
+  left: 50%;
+  position: absolute;
+  -webkit-transform: translateY(-50%) translateX(-50%);
+  transform: translateY(-50%) translateX(-50%);
+}
+
+.loading-box {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 999;
+}
+
+@-webkit-keyframes ball-beat {
+  50% {
+    opacity: 0.2;
+    -webkit-transform: scale(0.75);
+    transform: scale(0.75);
+  }
+
+  100% {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+}
+
+@keyframes ball-beat {
+  50% {
+    opacity: 0.2;
+    -webkit-transform: scale(0.75);
+    transform: scale(0.75);
+  }
+
+  100% {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+}
+
+.ball-beat>div {
+  background-color: #00a0e9;
+  width: 15px;
+  height: 15px;
+  border-radius: 100% !important;
+  margin: 2px;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  display: inline-block;
+  -webkit-animation: ball-beat 0.7s 0s infinite linear;
+  animation: ball-beat 0.7s 0s infinite linear;
+}
+
+.ball-beat>div:nth-child(2n-1) {
+  -webkit-animation-delay: 0.35s !important;
+  animation-delay: 0.35s !important;
+}
+
+textarea {
+  -webkit-appearance: none;
+  outline: none
+}
+
+#app {
+  .swiper-pagination-bullet {
+    width: 12px;
+    height: 12px;
+    border-radius: 6px;
+    background: #a4a3a5;
+    // background: #ffffff;
+    margin-right: 10px;
+  }
+
+  .swiper-pagination-bullet-active {
+    background: #ffffff;
+  }
+
+  .hot {
+    .hot-pagination {
+      .swiper-pagination-bullet {
+        width: 40px;
+        height: 10px;
+        border-radius: 6px;
+        background: #16bef8;
+        margin-right: 10px;
+        margin-top: 20px;
+      }
+
+      .swiper-pagination-bullet-active {
+        background: #16bef8;
+      }
+    }
+  }
+
+  .distpicker-address-wrapper {
+    color: black;
+    height: 100%;
+    overflow-y: scroll;
+    padding-top: 80px;
+    padding-bottom: 80px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .address-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .address-container {
+    height: 100%;
+    overflow-y: scroll;
+  }
+
+  .distpicker-address-wrapper .address-container ul {
+    padding-bottom: 100px;
+  }
+
+  .distpicker-address-wrapper .address-container ul li {
+    font-size: 25px;
+  }
+
+  .distpicker-address-wrapper ul li {
+    font-size: 23px;
+  }
+
+  .vc-slider {
+    width: 100%;
+  }
+
+  .picker-item {
+    font-size: 35px;
+  }
+
+  .detail img {
+    width: 100%;
+  }
+}
+
+.mint-toast-text {
+  font-size: 32px;
+}
+
+.mint-toast.is-placemiddle {
+  top: 15% !important;
+}
+
+// cfa298b4efb4a3e305fccdef3444dc57
+.over-hide {
+  overflow-y: hidden !important;
+  overflow-x: hidden !important;
+}

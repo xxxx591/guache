@@ -1,0 +1,12 @@
+export const SHOPCAR_ADD = 'SHOPCAR_ADD' // 将商品加入购物车
+export const SHOPCAR_SELECTED_PRODUCT = 'SHOPCAR_SELECTED_PRODUCT' // 在购物车中选中商品
+export const SHOPCAR_EDIT_SELECTED_PRODUCT = 'SHOPCAR_EDIT_SELECTED_PRODUCT' // 在购物车编辑模式中选中商品
+export const SHOPCAR_ADD_BUYNUM = 'SHOPCAR_ADD_BUYNUM' // 增加某个商品的数量
+export const SHOPCAR_SUB_BUYNUM = 'SHOPCAR_SUB_BUYNUM' // 减少某个商品的数量
+export const TOGGLE_IS_SELECTED_ALL = 'TOGGLE_IS_SELECTED_ALL' // 全选/取消, 购物车中所有商品的选中
+export const TOGGLE_EDIT_MODEL_IS_SELECTED_ALL =
+  'TOGGLE_EDIT_MODEL_IS_SELECTED_ALL' // 全选/取消, 购物车编辑模式中所有商品的选中
+
+export const DELETE_SHOP_CAR_PRODUCT = 'DELETE_SHOP_CAR_PRODUCT' // 删除购物车中的商品
+
+// export const SHOPCAR_EDIT_SELECTED_PRODUCT = 'SHOPCAR_EDIT_SELECTED_PRODUCT'
