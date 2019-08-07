@@ -1,10 +1,28 @@
 <template>
   <div class="FeedBack">
     <div class="top">
-      <img src="../../assets/back-arrow.png" @click.stop="topBack" class="top-back">
+      <img src="../../assets/back-arrow.png" @click.stop="topBack" class="top-back" />
       <div class="top-txt">留言反馈</div>
     </div>
     <div class="box">
+      <div>
+        <van-field
+          readonly
+          clickable
+          :value="value"
+          placeholder="请选择反馈类型"
+          @click="showPicker = true"
+        />
+
+        <van-popup v-model="showPicker" position="bottom">
+          <van-picker
+            show-toolbar
+            :columns="columns"
+            @cancel="showPicker = false"
+            @confirm="onConfirm"
+          />
+        </van-popup>
+      </div>
       <div class="b-input">
         <textarea
           cols="30"
@@ -14,6 +32,26 @@
           placeholder="请输入反馈内容"
           class="b-textarea"
         ></textarea>
+      </div>
+      <div class="b-input" style="    height: 52px;">
+        <textarea
+          cols="10"
+          rows="10"
+          v-model="qq"
+          maxlength="200"
+          placeholder="手机/QQ/邮箱"
+          class="b-textarea"
+        ></textarea>
+      </div>
+      <div>
+        <div class="img-list">
+          <!-- <van-image  round width="10rem" height="10rem" src="https://img.yzcdn.cn/vant/cat.jpeg" /> -->
+          <img v-for="(item, index) in coverImg" :key="index" :src="item" alt />
+        </div>
+        <div class="b-box2 flex-h" @click.stop="addCoverImg">
+          <p>最多上传6张图片</p>
+          <img src="../../assets/addimg.png" class="b-box-img" />
+        </div>
       </div>
     </div>
     <div class="submit" @click.stop="submit">
@@ -27,41 +65,59 @@
 import { mapActions, mapState } from "vuex";
 
 export default {
-  name: 'FeedBack',
+  name: "FeedBack",
   data() {
     return {
-      content: '',
+      content: "",
       imgArr: [],
-      phoneQQEmail: ''
-    }
+      phoneQQEmail: "",
+      value: "",
+      showPicker: false,
+      columns: ["技术反馈", "内容反馈", "投诉或其他"],
+      type: 0,
+      coverImg: []
+    };
   },
   computed: {
-    ...mapState({
-    })
+    ...mapState({})
   },
   methods: {
+    onConfirm(value) {
+      this.value = value;
+      this.showPicker = false;
+      this.type = this.columns.findIndex(item => item === value) + 1;
+    },
     inputBlur() {
-      window.scrollTo(0, 0)
+      window.scrollTo(0, 0);
     },
     topBack() {
-      this.$router.back(-1)
+      this.$router.back(-1);
+    },
+    async addCoverImg() {
+      let result = await this.native.uploadImgs({ count: 1, type: "user" });
+      // this.$toast(result, 1500)
+      if (result.image.length === 0) return;
+      this.coverImg.push(result.image[0]);
     },
     async submit() {
       if (!this.content) {
-        this.$toast('内容不能为空!')
-        return
+        this.$toast("内容不能为空!");
+        return;
       }
-      let token = await this.native.getToken({})
-      let result = this.api.sendFeedBack({ token: token.token, content: this.content })
+      let token = await this.native.getToken({});
+      let result = this.api.sendFeedBack({
+        token: token.token,
+        content: this.content
+      });
       if (result.error_code != 0) {
-        this.$toast('反馈成功!')
+        this.$toast("反馈成功!");
         setTimeout(() => {
-          this.$router.back(-1)
+          this.$router.back(-1);
         }, 1500);
       }
     }
-  },
-}
+  }
+};
 </script>
 
 <style lang='less' scoped>
@@ -95,6 +151,15 @@ export default {
     width: 100%;
     padding: 30px;
     box-sizing: border-box;
+    .img-list {
+      padding: 30px 0;
+      img {
+        width: 200px;
+        height: 200px;
+        margin-right: 20px;
+        display: inline-block;
+      }
+    }
     .b-category {
       background: #f7f8fa;
       height: 100%;
@@ -140,7 +205,7 @@ export default {
         resize: none;
         border: none;
         outline: none;
-            font-size: 32px;
+        font-size: 32px;
       }
       .con-txt {
         width: 690px;
@@ -228,6 +293,12 @@ export default {
         }
       }
     }
+    .van-cell {
+      background-color: #f7f8fa;
+      padding: 0.133333rem 0.2rem;
+      align-items: center;
+      line-height: 90px;
+    }
   }
   .submit {
     width: 640px;
@@ -241,6 +312,17 @@ export default {
       font-size: 30px;
       width: 100%;
       height: 100%;
+    }
+  }
+  .b-box2 {
+    flex-wrap: wrap;
+    font-size: 32px;
+    p {
+      width: 100%;
+    }
+    img {
+      width: 200px;
+      height: 200px;
     }
   }
 }

@@ -1,10 +1,10 @@
 <template>
   <div class="Mine" v-if="show">
     <div class="top">
-      <div class="top-1 flex-h" @click.stop="gotoPage({name: 'Set', pageUrl: '/Mine/Set'})">
-        <img src="../../assets/set.png" class="top-set" />
+      <div class="top-1 flex-h" >
+        <img src="../../assets/set.png" class="top-set" @click.stop="gotoPage({name: 'Set', pageUrl: '/Mine/Set'})"/>
         <!-- 消息功能取消 -->
-        <!-- <img src="../../assets/alerm.png" class="top-alerm"> -->
+        <img src="../../assets/alerm.png" class="top-alerm" @click.stop="gotoPage({name: 'AllMessage', pageUrl: '/Mine/AllMessage'})"/>
       </div>
       <div class="t-info flex-h" @click.stop="gotoPage({name: 'Info', pageUrl: '/Mine/Info'})">
         <div class="t-head">
@@ -192,7 +192,7 @@ export default {
       // if (obj === '') return
       console.log('obj',obj);
       
-      this.$router.push({ name: obj.name })
+      // this.$router.push({ name: obj.name })
       // 此页面所有路由跳转都要调用此原生通知
       this.native.routerGoTo({
         url:

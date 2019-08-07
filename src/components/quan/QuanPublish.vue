@@ -221,6 +221,8 @@ export default {
       // this.$toast(result, 1500)
       if (result.image.length === 0) return;
       this.coverImg = result.image[0];
+      console.log('this.cover',this.coverImg);
+      
     }
   },
 

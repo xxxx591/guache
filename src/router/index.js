@@ -60,6 +60,8 @@ import ModifyNickname from '@/components/Mine/ModifyNickname' // 修改昵称
 import ModifyPhone from '@/components/Mine/ModifyPhone' // 修改手机
 import Des from '@/components/Mine/Des' // 修改详情
 import Set from '@/components/Mine/Set' // 设置
+import Message from '@/components/Mine/Message' // 服务消息
+import AllMessage from '@/components/Mine/AllMessage' // 设置首页
 
 import OrderList from '@/components/Mine/OrderList' // 订单列表
 import OrderDetail from '@/components/Mine/OrderDetail' // 订单想起
@@ -73,6 +75,7 @@ import MsgList from '@/components/Mine/MsgList' // 消息列表
 import Setting from '@/components/Mine/Setting' // 设置
 import FeedBack from '@/components/Mine/FeedBack' // 留言反馈
 import AboutUs from '@/components/Mine/AboutUs' // 关于我们  取消该功能
+import AboutUs2 from '@/components/Mine/AboutUs2' // 关于我们  取消该功能
 import Version from '@/components/Mine/Version' // 版本说明
 
 Vue.use(Router)
@@ -353,6 +356,16 @@ export default new Router({
       component: Info
     },
     {
+      path: '/Mine/Message',
+      name: 'Message',
+      component: Message
+    },
+    {
+      path: '/Mine/AllMessage',
+      name: 'AllMessage',
+      component: AllMessage
+    },
+    {
       path: '/Mine/ModifyNickname',
       name: 'ModifyNickname',
       component: ModifyNickname
@@ -432,6 +445,11 @@ export default new Router({
       path: '/Mine/AboutUs',
       name: 'AboutUs',
       component: AboutUs
+    },
+    {
+      path: '/Mine/AboutUs2',
+      name: 'AboutUs2',
+      component: AboutUs2
     },
     {
       path: '/Mine/Version',

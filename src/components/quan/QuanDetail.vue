@@ -159,7 +159,7 @@ export default {
       }
       let data = await this.api.quanNoteCollect(params)
       console.log('data',data);
-      // this.articleDetail.is_collect = data.data.
+      this.articleDetail.is_collect = data.data.is_collect
       
     },
     async getDetail(id) {

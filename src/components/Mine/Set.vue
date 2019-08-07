@@ -5,7 +5,7 @@
       <div class="top-txt">设置</div>
     </div>
     <div class="box">
-      <div class="b-box flex-h" @click.stop="gotoPage({name: 'ChangePwd', pageUrl: '/ChangePwd'})">
+      <div class="b-box flex-h" @click="gogood">
         <div class="b-left flex-h">
           <div class="b-txt">给我们好评</div>
         </div>
@@ -24,7 +24,7 @@
           <img src="../../assets/right-arrow.png" class="b-arrow-img">
         </div>
       </div>
-      <div class="b-box flex-h" @click.stop="gotoPage({name: 'AboutUs', pageUrl: '/Mine/AboutUs'})">
+      <div class="b-box flex-h" @click.stop="gotoPage({name: 'AboutUs2', pageUrl: '/Mine/AboutUs2'})">
         <div class="b-left flex-h">
           <div class="b-txt">关于我们</div>
         </div>
@@ -33,7 +33,7 @@
           <img src="../../assets/right-arrow.png" class="b-arrow-img">
         </div>
       </div>
-      <div class="b-box flex-h" @click.stop="gotoPage({name: 'ChangePwd', pageUrl: '/ChangePwd'})">
+      <div class="b-box flex-h" @click.stop="gotoPage({name: 'Version', pageUrl: '/Version'})">
         <div class="b-left flex-h">
           <div class="b-txt">版权说明</div>
         </div>
@@ -41,7 +41,7 @@
           <img src="../../assets/right-arrow.png" class="b-arrow-img">
         </div>
       </div>
-      <div class="b-box flex-h" @click.stop="gotoPage({name: 'ChangePwd', pageUrl: '/ChangePwd'})">
+      <div class="b-box flex-h">
         <div class="b-left flex-h">
           <div class="b-txt">清除缓存</div>
         </div>
@@ -75,6 +75,9 @@ export default {
     // this.getUserInfo()
   },
   methods: {
+    gogood(){
+      this.routerGoTo(' itms-apps://itunes.apple.com/cn/app/id1459483792?mt=8')
+    },
     // ...mapActions(["setTab"]),
     inputBlur() {
       window.scrollTo(0, 0)

@@ -639,6 +639,34 @@ api.getAllNum = obj => {
     resolve(data)
   })
 }
+// G90-全部消息
+api.getAllMessage = obj => {
+  return new Promise(async (resolve, reject) => {
+    let data = await post(`${config.url}/api/notice/list`, obj || {})
+    resolve(data)
+  })
+}
+// G90-二手车
+api.getTwoCar = obj => {
+  return new Promise(async (resolve, reject) => {
+    let data = await post(`${config.url}/api/notice/usedCar`, obj || {})
+    resolve(data)
+  })
+}
+// G90-帖子
+api.getTwoTiezi = obj => {
+  return new Promise(async (resolve, reject) => {
+    let data = await post(`${config.url}/api/notice/note`, obj || {})
+    resolve(data)
+  })
+}
+// G90-未读消息
+api.getTwoWeidu = obj => {
+  return new Promise(async (resolve, reject) => {
+    let data = await post(`${config.url}/api/notice/note`, obj || {})
+    resolve(data)
+  })
+}
 
 // 获取圈子文章评论列表
 api.quanArticleCommentsList = obj => {
