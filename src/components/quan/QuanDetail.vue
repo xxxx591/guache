@@ -137,7 +137,7 @@ export default {
       window.scrollTo(0, 0);
     },
     topBack() {
-      this.native.back_btn({});
+      // this.native.back_btn({});
       this.$router.back(-1);
     },
     pinglun() {

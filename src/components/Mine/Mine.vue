@@ -87,7 +87,7 @@
         </div>
       </div>
       <!-- 该功能删除 -->
-      <div class="b-box flex-h" @click.stop="$router.push({name: 'AboutUs'})">
+      <div class="b-box flex-h"   @click.stop="gotoPage({name: 'AboutUs', pageUrl: '/Mine/AboutUs'})">
         <div class="b-left flex-h">
           <img src="../../assets/about-us-icon.png" class="b-left-icon">
           <div class="b-txt">关于我们</div>
@@ -192,7 +192,7 @@ export default {
       // if (obj === '') return
       console.log('obj',obj);
       
-      this.$router.push({ name: obj.name })
+      // this.$router.push({ name: obj.name })
       // 此页面所有路由跳转都要调用此原生通知
       this.native.routerGoTo({
         url:

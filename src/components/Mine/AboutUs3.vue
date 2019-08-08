@@ -2,10 +2,10 @@
   <div class="AboutUs">
     <div class="top">
       <img src="../../assets/back-arrow.png" @click.stop="topBack" class="top-back">
-      <div class="top-txt">关于我们</div>
+      <div class="top-txt">挂车之家用户协议</div>
     </div>
     <div class="content" v-html="this.content"></div>
-    <div class="box flex-v">
+    <!-- <div class="box flex-v">
       <img src="../../assets/logo.png" class="b-logo">
       <div class="b-title">挂车之家 v4.0.0</div>
       <div class="b-phone">客服热线：400-0000-000</div>
@@ -13,10 +13,10 @@
     </div>
     <div class="bottom">
       <div class="bo-box flex-v flex-cc">
-        <div class="bo-title" @click="tieziDetails">《挂车之家用户协议》</div>
+        <div class="bo-title">《挂车之家用户协议》</div>
         <div class="bo-title2">CopyRight @挂车之家2015 - 2017</div>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -38,8 +38,15 @@ export default {
   },
   created() {
     // this.getServiceContent()
+    this.init()
   },
   methods: {
+    async init(){
+      let data = await this.api.pageInfo({content_id:3})
+      this.content = data.data.content
+      console.log('data',data.data.content);
+      
+    },
     // ...mapActions(["setTab"]),
     inputBlur() {
       window.scrollTo(0, 0)
@@ -51,15 +58,8 @@ export default {
       this.content = data.data && data.data.content
       console.log('data---', data)
     },
-    tieziDetails(item) {
-      // this.$store.state.yuanhang = 1;
-      this.$router.push({
-        path: "/Mine/AboutUs3",
-        
-      });
-    },
     topBack() {
-      this.native.back_btn({})
+      // this.native.back_btn({})
       this.$router.back(-1)
     }
   }
@@ -98,6 +98,7 @@ export default {
     box-sizing: border-box;
     padding: 0 30px;
     padding-top: 80px;
+    font-size: 14px;
   }
   .box {
     width: 100%;

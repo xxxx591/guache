@@ -76,7 +76,7 @@ export default {
   },
   methods: {
     gogood(){
-      this.routerGoTo(' itms-apps://itunes.apple.com/cn/app/id1459483792?mt=8')
+     this.native.good()
     },
     // ...mapActions(["setTab"]),
     inputBlur() {

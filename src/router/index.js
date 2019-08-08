@@ -77,6 +77,7 @@ import Setting from '@/components/Mine/Setting' // 设置
 import FeedBack from '@/components/Mine/FeedBack' // 留言反馈
 import AboutUs from '@/components/Mine/AboutUs' // 关于我们  取消该功能
 import AboutUs2 from '@/components/Mine/AboutUs2' // 关于我们  取消该功能
+import AboutUs3 from '@/components/Mine/AboutUs3' // 关于我们  取消该功能
 import Version from '@/components/Mine/Version' // 版本说明
 
 Vue.use(Router)
@@ -456,6 +457,11 @@ export default new Router({
       path: '/Mine/AboutUs2',
       name: 'AboutUs2',
       component: AboutUs2
+    },
+    {
+      path: '/Mine/AboutUs3',
+      name: 'AboutUs3',
+      component: AboutUs3
     },
     {
       path: '/Mine/Version',

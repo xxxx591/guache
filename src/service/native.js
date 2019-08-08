@@ -156,6 +156,14 @@ native.share = obj => {
     })
   })
 }
+// 用于跳转到好评
+native.good = obj => {
+  native.JSBridge(bridge => {
+    bridge.callHandler('evaluation', obj, dataFromOC => {
+      console.log('dataFromOC----', dataFromOC);
+    })
+  })
+}
 
 // 拨号
 native.makeCall = obj => {

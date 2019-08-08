@@ -159,16 +159,13 @@ export default {
         query: { id: item.note.id, type: 2 }
       });
     },
-    carDetails(item) {
-      // this.$router.push({
-      //   path: "/Quality/QualityProductDetail",
-      //   query: { productid: item.goods.id, type: 2 }
-      // });
+    async carDetails(item) {
+      let token = await this.token;
+      let url = `http://h5.gc-app.com/#/Car/ProductDetail?id=${item.trailer.id}&token=${token.token}&type=1`;
+      console.log("url", url);
+
       this.native.routerGoTo({
-        url:
-          "http://h5.gc-app.com/#/Car/ProductDetail?id=" +
-          item.trailer.id +
-          "&token=this.token"
+        url: url
       });
     }
   }
