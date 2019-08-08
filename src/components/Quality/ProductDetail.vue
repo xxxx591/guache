@@ -118,15 +118,15 @@ export default {
   },
   methods: {
     async shoucang() {
-      console.log('aasd');
-      
+      console.log("aasd");
+
       let token = await this.native.getToken({});
       let params = {
         token: token,
         goods_id: this.productInfo.id
       };
       let data = await this.api.quality_goodCollect(params);
-      this.productInfo.is_collect = data.data.is_collect
+      this.productInfo.is_collect = data.data.is_collect;
     },
     goBuyIt() {
       this.$store.state.productInfo = this.productInfo;
@@ -155,8 +155,10 @@ export default {
       this.buyNum++;
     },
     async getProductDetail(productid) {
+      let token = await this.native.getToken({});
       let data = await this.api.quality_getProductDetail({
-        goods_id: productid
+        goods_id: productid,
+        token: token.token
       });
       this.productInfo = data.data;
     },

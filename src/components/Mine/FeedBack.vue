@@ -37,7 +37,7 @@
         <textarea
           cols="10"
           rows="10"
-          v-model="qq"
+          v-model="phoneQQEmail"
           maxlength="200"
           placeholder="手机/QQ/邮箱"
           class="b-textarea"
@@ -103,11 +103,17 @@ export default {
       if (!this.content) {
         this.$toast("内容不能为空!");
         return;
+      }else if(this.type==0){
+        this.$toast("请选择问题分类!");
+        return;
       }
       let token = await this.native.getToken({});
       let result = this.api.sendFeedBack({
         token: token.token,
-        content: this.content
+        content: this.content,
+        type:this.type,
+        contact_way:this.phoneQQEmail,
+        pic:this.coverImg
       });
       if (result.error_code != 0) {
         this.$toast("反馈成功!");

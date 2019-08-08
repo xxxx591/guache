@@ -62,6 +62,7 @@ import Des from '@/components/Mine/Des' // 修改详情
 import Set from '@/components/Mine/Set' // 设置
 import Message from '@/components/Mine/Message' // 服务消息
 import AllMessage from '@/components/Mine/AllMessage' // 设置首页
+import AdminMessage from '@/components/Mine/admin_message' // 设置首页
 
 import OrderList from '@/components/Mine/OrderList' // 订单列表
 import OrderDetail from '@/components/Mine/OrderDetail' // 订单想起
@@ -364,6 +365,11 @@ export default new Router({
       path: '/Mine/AllMessage',
       name: 'AllMessage',
       component: AllMessage
+    },
+    {
+      path: '/Mine/AdminMessage',
+      name: 'AdminMessage',
+      component: AdminMessage
     },
     {
       path: '/Mine/ModifyNickname',

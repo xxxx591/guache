@@ -663,7 +663,7 @@ api.getTwoTiezi = obj => {
 // G90-未读消息
 api.getTwoWeidu = obj => {
   return new Promise(async (resolve, reject) => {
-    let data = await post(`${config.url}/api/notice/note`, obj || {})
+    let data = await post(`${config.url}/api/notice/noticeNum`, obj || {})
     resolve(data)
   })
 }

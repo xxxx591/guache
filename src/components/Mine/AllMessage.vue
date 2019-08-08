@@ -4,38 +4,43 @@
       <img src="../../assets/back-arrow.png" @click.stop="topBack" class="top-back" />
       <div class="top-txt">消息中心</div>
     </div>
-    <div class="list">
-      <div class="list-item">
+    <div class="list" v-if="show">
+      <div class="list-item" @click.stop="waiter">
         <div class="left-box">
           <img src="../../assets/kefu-message.png" alt />
         </div>
         <div class="right-box">
           <p>在线客服</p>
-          <p>查看与客服的沟通记录</p>
+          <!-- <p>查看与客服的沟通记录</p> -->
         </div>
-        <em>8</em>
+        <!-- <em>{{list.serve_notice_car}}</!-->
         <i>></i>
       </div>
-      <div class="list-item">
+      <div class="list-item" @click.stop="gotoPage({name: 'Message', pageUrl: '/Mine/Message'})">
         <div class="left-box">
           <img src="../../assets/message.png" alt />
         </div>
         <div class="right-box">
           <p>服务消息</p>
-          <p>查看与客服的沟通记录</p>
+          <!-- <p>查看与客服的沟通记录</p> -->
         </div>
-        <em>8</em>
+        <em
+          v-if="list.serve_notice_car+list.serve_notice_note!=0"
+        >{{list.serve_notice_car+list.serve_notice_note}}</em>
         <i>></i>
       </div>
-      <div class="list-item">
+      <div
+        class="list-item"
+        @click.stop="gotoPage({name: 'AdminMessage', pageUrl: '/Mine/AdminMessage'})"
+      >
         <div class="left-box">
           <img src="../../assets/admin.png" alt />
         </div>
         <div class="right-box">
           <p>系统消息</p>
-          <p>板车订购交货时间延后说明</p>
+          <!-- <p>板车订购交货时间延后说明</p> -->
         </div>
-        <em>8</em>
+        <em v-if="list.system_notice_num!=0">{{list.system_notice_num}}</em>
         <i>></i>
       </div>
     </div>
@@ -50,7 +55,9 @@ export default {
   name: "Collect",
   data() {
     return {
-      token: ""
+      token: "",
+      list: [],
+      show: true
     };
   },
   computed: {
@@ -69,8 +76,34 @@ export default {
         page: 0,
         pagesize: 30
       };
-      let data = await this.api.getAllMessage(params);
+      let data = await this.api.getTwoWeidu(params);
       console.log("params", data);
+      this.show = false;
+      this.$nextTick(_ => {
+        this.list = data.data;
+        this.show = true;
+      });
+    },
+    gotoPage(obj) {
+      if (obj === "") return;
+      this.$router.push({ name: obj.name });
+      // 此页面所有路由跳转都要调用此原生通知
+      // this.native.routerGoTo({ url: 'http://gczj.sinmore.vip/html/#' + obj.pageUrl })
+    },
+    waiter() {
+      (function(m, ei, q, i, a, j, s) {
+        m[i] =
+          m[i] ||
+          function() {
+            (m[i].a = m[i].a || []).push(arguments);
+          };
+        (j = ei.createElement(q)), (s = ei.getElementsByTagName(q)[0]);
+        j.async = true;
+        j.charset = "UTF-8";
+        j.src = "https://static.meiqia.com/dist/meiqia.js?_=t";
+        s.parentNode.insertBefore(j, s);
+      })(window, document, "script", "_MEIQIA");
+      window._MEIQIA("entId", 147235);
     }
   }
 };
@@ -124,7 +157,7 @@ export default {
       .right-box {
         display: flex;
         flex-wrap: wrap;
-        align-content: space-between;
+        align-content: center;
         p {
           margin: 0;
           width: 100%;
@@ -133,7 +166,8 @@ export default {
             font-size: 24px;
             font-family: PingFangSC-Regular;
             font-weight: 400;
-            color: rgba(153, 153, 153, 1);
+            // color: rgba(153, 153, 153, 1);
+            color: #000000;
           }
         }
       }

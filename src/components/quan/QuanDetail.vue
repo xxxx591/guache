@@ -1,7 +1,7 @@
 <template>
   <div class="QuanDetail">
     <div class="top">
-      <img src="../../assets/back-arrow.png" @click.stop="topBack" class="top-back">
+      <img src="../../assets/back-arrow.png" @click.stop="topBack" class="top-back" />
       <div class="top-txt">文章详情</div>
       <span style="position: absolute;right: 0.4rem;" @click="yaoqing">···</span>
     </div>
@@ -26,7 +26,7 @@
         <div class="comments-top flex-h">
           <div class="comments-left flex-h">
             <div class="comments-img">
-              <img :src="item.get_user.avatar" class="comments-img2">
+              <img :src="item.get_user.avatar" class="comments-img2" />
             </div>
             <div class="comments-name">{{item.get_user.nickname}}</div>
           </div>
@@ -37,21 +37,16 @@
       </div>
     </div>
     <div class="bottom">
-      <div class="bottom-box flex-h" >
+      <div class="bottom-box flex-h">
         <div class="b-input flex-h" @click.stop="pinglun">请输入要评论的内容</div>
         <div class="b-star" v-if="articleDetail.is_collect==0">
-          <img src="../../assets/shoucang.png" alt class="b-img" @click="shoucang" >
-          <div class="b-num">
-            {{articleDetail.collect_count}}
-          </div>
+          <img src="../../assets/shoucang.png" alt class="b-img" @click="shoucang" />
+          <div class="b-num">{{articleDetail.collect_count}}</div>
         </div>
         <div class="b-star" v-if="articleDetail.is_collect==1">
-          <img src="../../assets/shoucang-on.png" alt class="b-img" @click="shoucang" >
-          <div class="b-num">
-            {{articleDetail.collect_count}}
-          </div>
+          <img src="../../assets/shoucang-on.png" alt class="b-img" @click="shoucang" />
+          <div class="b-num">{{articleDetail.collect_count}}</div>
         </div>
-
       </div>
     </div>
     <div class="c-box" v-show="false">
@@ -113,8 +108,8 @@ export default {
       commentsList: [],
       commentText: "",
       isShowommentBox: false,
-      jieliu:true,
-      show:false
+      jieliu: true,
+      show: false
     };
   },
   computed: {
@@ -151,19 +146,22 @@ export default {
     shiqu() {
       window.scrollTo(0, 0);
     },
-   async shoucang(){
+    async shoucang() {
       let token = await this.native.getToken({});
-      let params ={
-        token:token,
-        note_id:this.articleDetail.id
-      }
-      let data = await this.api.quanNoteCollect(params)
-      console.log('data',data);
-      this.articleDetail.is_collect = data.data.is_collect
-      
+      let params = {
+        token: token,
+        note_id: this.articleDetail.id
+      };
+      let data = await this.api.quanNoteCollect(params);
+      console.log("data", data);
+      this.articleDetail.is_collect = data.data.is_collect;
     },
     async getDetail(id) {
-      let detail = await this.api.quanArticleDetail({ note_id: id });
+      let token = await this.native.getToken({});
+      let detail = await this.api.quanArticleDetail({
+        note_id: id,
+        token: token.token
+      });
       detail.data.content = decodeURIComponent(detail.data.content);
       this.articleDetail = detail.data;
       console.log("detail--", detail);
@@ -194,7 +192,7 @@ export default {
           this.getComments(this.$route.query.id);
         }
       } else {
-        this.$toast('点击过快，请稍后再试')
+        this.$toast("点击过快，请稍后再试");
         setTimeout(_ => {
           this.jieliu = true;
         }, 3000);
@@ -514,7 +512,7 @@ export default {
       }
     }
   }
-   .yaoqing-box {
+  .yaoqing-box {
     height: 4.266667rem /* 320/75 */;
     .title {
       font-size: 0.426667rem /* 32/75 */;

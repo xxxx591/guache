@@ -99,6 +99,10 @@ export default {
       
       let product = this.$route.params.product;
       let productid = this.$route.query.productid;
+      let params ={
+        token:this.$store.state.datas.token,
+        goods_id:productid
+      }
       console.log("productid---", productid);
       this.getProductDetail(productid);
       this.getUserInfo();

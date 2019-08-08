@@ -2,7 +2,7 @@
   <div class="Collect">
     <div class="top">
       <img src="../../assets/back-arrow.png" @click.stop="topBack" class="top-back" />
-      <div class="top-txt">我的收藏</div>
+      <div class="top-txt">服务消息</div>
     </div>
     <div class="scroll flex-h">
       <div
@@ -15,42 +15,32 @@
       <div class="scroll-right">.</div>
     </div>
     <div class="box flex-h" v-if="currentTab==0">
-      <div class="box-pro" v-for="(item,index) in shopList" :key="index">
-        <div class="b-top" @click="goosDetails(item)">
-          <img :src="item.goods.cover" class="b-top-img" />
+      <div class="fuwu-tuisong" v-for="(item,index) in tieziList" :key="index">
+        <div class="time-box">
+          <p>{{item.created_at}}</p>
         </div>
-        <div class="b-title">{{item.goods.title}}</div>
-        <div class="b-price">{{item.goods.price}}</div>
+        <div class="title-box">
+          <p>您发布的“{{item.note.title}}”{{item.status == 0?'已下架':'已上架'}}</p>
+        </div>
       </div>
     </div>
     <div class="box flex-h" v-if="currentTab==1">
-      <div class="content-box" v-for="(item,index) in tieziList" :key="index">
-        <div class="left-content" @click="tieziDetails(item)">
-          <img :src="item.note.thumb" alt />
+      <div class="fuwu-tuisong" v-for="(item,index) in shopList" :key="index">
+        <div class="time-box">
+          <p>{{item.created_at}}</p>
         </div>
-        <div class="right-content" @click="tieziDetails(item)">
-          <p>{{item.note.title}}</p>
-          <div class="bottom-content">
-            <p>{{item.note.get_user.nickname}}</p>
-            <p>{{item.note.view}}次阅读</p>
-          </div>
+        <div class="title-box">
+          <p>您发布的“{{item.used_car.name}}”{{item.status == 0?'已下架':'已上架'}}</p>
         </div>
       </div>
     </div>
     <div class="box flex-h" v-if="currentTab==2">
-      <div class="content-box" v-for="(item,index) in carList" :key="index">
-        <div
-          class="left-content left-content-car"
-          :style="'background-image: url('+item.trailer.cover+')'"
-          @click="carDetails(item)"
-        >
-          <!-- <img :src="item.trailer.cover" alt /> -->
+      <div class="fuwu-tuisong" v-for="(item,index) in carList" :key="index">
+        <div class="time-box">
+          <p>{{item.created_at}}</p>
         </div>
-        <div class="right-content" @click="carDetails(item)">
-          <p>{{item.trailer.name}}</p>
-          <div class="bottom-content">
-            <p class="red-price">{{item.trailer.price_range}}</p>
-          </div>
+        <div class="title-box">
+          <p>您发布的“{{item.used_car.name}}”{{item.status == 0?'已下架':'已上架'}}</p>
         </div>
       </div>
     </div>
@@ -66,14 +56,14 @@ export default {
   data() {
     return {
       scrollTitle: [
-        { val: "商品", num: 0 },
         { val: "帖子", num: 0 },
-        { val: "车辆", num: 0 }
+        { val: "二手挂车", num: 0 },
+        { val: "二手牵引车", num: 0 }
       ],
       shopList: [],
       tieziList: [],
       carList: [],
-      currentTab: 1,
+      currentTab: 0,
       token: ""
     };
   },
@@ -93,12 +83,26 @@ export default {
         page: 0,
         pagesize: 30
       };
-      let data = await this.api.getAllNum(params);
+      let data = await this.api.getTwoTiezi(params);
+      let data2 = await this.api.getTwoCar(params);
       console.log("data", data);
-      this.scrollTitle[0].num = data.data.goods_collect;
-      this.scrollTitle[1].num = data.data.note_collect;
-      this.scrollTitle[2].num = data.data.trailer_collect;
-      this.changeTab(1);
+      console.log("data2", data2);
+      this.tieziList = data.data.data;
+      let arr = data2.data.data;
+      this.scrollTitle[0].num = data.data.count;
+
+      arr.map(item => {
+        console.log('ite,',item);
+        if (item.type == 2) {
+          this.carList.push(item);
+        } else {
+          this.shopList.push(item);
+        }
+      });
+      console.log(this.carList);
+      this.scrollTitle[1].num = this.shopList.length;
+      this.scrollTitle[2].num = this.carList.length;
+      // this.changeTab(0);
       // let data1 = await this.api.getShops(params);
       // console.log("data1", data1);
       // this.shopList = data1.data.data;
@@ -108,31 +112,7 @@ export default {
     },
     async changeTab(tabNum) {
       this.currentTab = tabNum;
-      let params = {
-        token: this.token,
-        page: 0,
-        pagesize: 30
-      };
-      switch (tabNum) {
-        case 0:
-          let data1 = await this.api.getShops(params);
-          console.log("data1", data1);
-          this.shopList = data1.data.data;
-          break;
-        case 1:
-          let data2 = await this.api.getTiezis(params);
-          console.log("data1", data2);
-          this.tieziList = data2.data.data;
-          break;
-        case 2:
-          let data3 = await this.api.getCars(params);
-          console.log("data1", data3);
-          this.carList = data3.data.data;
-          break;
-
-        default:
-          break;
-      }
+      
     },
     topBack() {
       // this.native.back_btn({})
@@ -198,7 +178,7 @@ export default {
     align-items: center;
     overflow-x: scroll;
     .scroll-item {
-      margin-right: 170px;
+      margin-right: 120px;
       white-space: nowrap;
       height: 88px;
       line-height: 100px;
@@ -264,6 +244,28 @@ export default {
     }
     .box-pro:nth-child(2n) {
       margin-left: 20px;
+    }
+    .fuwu-tuisong {
+      font-size: 32px;
+      text-align: center;
+      width: 100%;
+      margin-bottom: 60px;
+      border-bottom: 1px solid #cacaca;
+      p {
+        margin: 0;
+        color: #999;
+        font-size: 28px;
+      }
+      .title-box {
+        p {
+          padding: 30px 0;
+          font-size: 32px;
+          font-family: PingFangSC-Medium;
+          font-weight: 500;
+          color: #000;
+          text-align: left;
+        }
+      }
     }
   }
   .content-box {

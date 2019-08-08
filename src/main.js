@@ -41,7 +41,7 @@ Vue.use(VueLocalStorage)
 
 Vue.use(VueAwesomeSwiper /* { default global options } */)
 // Vue.use(Mui)
-new VConsole()
+// new VConsole()
 Vue.config.productionTip = false
 
 Vue.prototype.config = config
