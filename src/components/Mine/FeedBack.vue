@@ -304,6 +304,7 @@ export default {
       padding: 0.133333rem 0.2rem;
       align-items: center;
       line-height: 90px;
+      font-size: 32px;
     }
   }
   .submit {

@@ -70,6 +70,9 @@ export default {
     this.init();
   },
   methods: {
+    topBack() {
+      this.native.back_btn({});
+    },
     async init() {
       let params = {
         token: this.token,
