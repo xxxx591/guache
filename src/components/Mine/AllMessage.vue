@@ -25,8 +25,8 @@
           <!-- <p>查看与客服的沟通记录</p> -->
         </div>
         <em
-          v-if="list.serve_notice_car+list.serve_notice_note!=0"
-        >{{list.serve_notice_car+list.serve_notice_note}}</em>
+          v-if="list.serve_notice_car!=0"
+        >{{list.serve_notice_car }}</em>
         <i>></i>
       </div>
       <div
@@ -56,7 +56,11 @@ export default {
   data() {
     return {
       token: "",
-      list: [],
+      list: [
+        {serve_notice_car:0},
+        {serve_notice_note:0},
+        {system_notice_num:0},
+      ],
       show: true
     };
   },

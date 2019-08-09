@@ -10,7 +10,7 @@
           <p>{{item.created_at}}</p>
         </div>
         <div class="title-box">
-          <p>您发布的商品{{item.status == 0?'未上架':'已上架'}}</p>
+          <p>您发布的商品已发货</p>
           <p style="padding: 0 0 10px;">订单号码：{{item.sn}},快去查看物流吧。</p>
         </div>
       </div>

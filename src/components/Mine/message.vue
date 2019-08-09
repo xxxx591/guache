@@ -87,12 +87,15 @@ export default {
       let data2 = await this.api.getTwoCar(params);
       console.log("data", data);
       console.log("data2", data2);
+      if (data2.data.data == undefined || data.data.data == undefined) {
+        return;
+      }
       this.tieziList = data.data.data;
       let arr = data2.data.data;
+      console.log("this.scrollTitle[0].num ", this.tieziList);
       this.scrollTitle[0].num = data.data.count;
-
       arr.map(item => {
-        console.log('ite,',item);
+        console.log("ite,", item);
         if (item.type == 2) {
           this.carList.push(item);
         } else {
@@ -112,7 +115,6 @@ export default {
     },
     async changeTab(tabNum) {
       this.currentTab = tabNum;
-      
     },
     topBack() {
       // this.native.back_btn({})

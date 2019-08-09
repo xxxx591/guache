@@ -137,8 +137,11 @@ export default {
       window.scrollTo(0, 0);
     },
     topBack() {
-      // this.native.back_btn({});
-      this.$router.back(-1);
+      if (this.$route.query.type == 2) {
+        this.$router.back(-1);
+      } else {
+        this.native.back_btn({});
+      }
     },
     pinglun() {
       this.isShowommentBox = !this.isShowommentBox;
