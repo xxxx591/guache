@@ -153,12 +153,12 @@ export default {
       this.getOrderData(str);
     },
     topBack() {
-      if (this.$route.query.type) {
-        console.log("123");
-        this.$router.back(-1);
-      } else {
+      // if (this.$route.query.type) {
+      //   console.log("123");
+      //   this.$router.back(-1);
+      // } else {
         this.native.back_btn({});
-      }
+      // }
     },
     async getOrderData(type = "order") {
       this.orders = [];

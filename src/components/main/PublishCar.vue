@@ -91,6 +91,8 @@ export default {
   },
   created() {
     this.form = this.$route.query;
+     let addr = this.form.selectedAddr.split(" ");
+      console.log("adddr--", addr[0], addr[1],addr[2]);
   },
   methods: {
     // ...mapActions(["saveToken"]),
@@ -125,6 +127,7 @@ export default {
         years: parseInt(this.form.selectedYear),
         province: addr[0],
         city: addr[1],
+        area:addr[2],
         count: this.form.selectedGuoHuNum,
         turbo: this.form.selectedDismiss,
         motor: this.form.engineData,

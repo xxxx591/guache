@@ -370,6 +370,9 @@ export default {
     padding: 30px;
     box-sizing: border-box;
     background: #ffffff;
+    p {
+      font-size: 12px !important;
+    }
     .detail-img {
       width: 100%;
     }

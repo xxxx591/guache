@@ -1,7 +1,7 @@
 <template>
   <div class="ProductDetail">
     <div class="top">
-      <img src="../../assets/back-arrow.png" @click.stop="topBack" class="top-back">
+      <img src="../../assets/back-arrow.png" @click.stop="topBack" class="top-back" />
       <div class="top-txt">商品详情</div>
     </div>
     <div class="banner">
@@ -12,7 +12,7 @@
       >
         <template v-for="(item, index) in (productInfo && productInfo.point_pic)">
           <swiper-slide class="banner-swiper-item" :key="index">
-            <img :src="item.pic" alt class="banner-swiper-img">
+            <img :src="item.pic" alt class="banner-swiper-img" />
           </swiper-slide>
         </template>
       </swiper>
@@ -40,7 +40,7 @@
     <div class="buy">
       <div class="buy-box flex-h">
         <div class="contact flex-h" @click.stop="waiter">
-          <img src="../../assets/kefu.png" alt class="contact-img">
+          <img src="../../assets/kefu.png" alt class="contact-img" />
           <div class="contact-txt">客服</div>
         </div>
         <div class="exchange flex-h flex-cc" @click.stop="nowExchange">立即兑换</div>
@@ -82,27 +82,30 @@ export default {
       token: state => state.datas.token
     })
   },
- async created() {
+  async created() {
     var u = navigator.userAgent;
     var isAndroid = u.indexOf("Android") > -1 || u.indexOf("Adr") > -1;
     if (isAndroid) {
-      console.log("token",this.$route.query.token);
+      console.log("token", this.$route.query.token);
       // console.log('state',this.$store.state.datas.token);
       let product = this.$route.params.product;
       let productid = this.$route.query.productid;
-      this.$store.state.datas.token = this.$route.query.token
+      this.$store.state.datas.token = this.$route.query.token;
       this.getProductDetail(productid);
       this.getUserInfo();
-    }else{
+    } else {
       this.$store.state.datas.token = await this.native.getToken({});
-      console.log('this.$store.state.datas.token',this.$store.state.datas.token);
-      
+      console.log(
+        "this.$store.state.datas.token",
+        this.$store.state.datas.token
+      );
+
       let product = this.$route.params.product;
       let productid = this.$route.query.productid;
-      let params ={
-        token:this.$store.state.datas.token,
-        goods_id:productid
-      }
+      let params = {
+        token: this.$store.state.datas.token,
+        goods_id: productid
+      };
       console.log("productid---", productid);
       this.getProductDetail(productid);
       this.getUserInfo();
@@ -123,7 +126,7 @@ export default {
     },
     async getProductDetail(id) {
       this.buyNum = 1;
-      
+
       let data = await this.api.jifen_productDetail({
         point_id: id,
         token: this.$store.state.datas.token
@@ -154,7 +157,9 @@ export default {
     async getUserInfo() {
       // let token = await this.native.getToken({});
       // console.log("getUserInfo", token);
-      let info = await this.api.userDetail({ token: this.$store.state.datas.token });
+      let info = await this.api.userDetail({
+        token: this.$store.state.datas.token
+      });
       this.userInfo = info.data;
       console.log("this.userInfo--", this.userInfo);
     },
@@ -329,6 +334,10 @@ export default {
     padding: 30px;
     background: #ffffff;
     overflow: hidden;
+    font-size: 0.426667rem !important;
+    p {
+      font-size: 0.426667rem !important;
+    }
     .detail-img {
       width: 100%;
     }

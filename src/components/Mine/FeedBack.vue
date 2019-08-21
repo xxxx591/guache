@@ -97,13 +97,17 @@ export default {
       let result = await this.native.uploadImgs({ count: 1, type: "user" });
       // this.$toast(result, 1500)
       if (result.image.length === 0) return;
-      this.coverImg.push(result.image[0]);
+      if (this.coverImg.length == 6) {
+        return;
+      } else {
+        this.coverImg.push(result.image[0]);
+      }
     },
     async submit() {
       if (!this.content) {
         this.$toast("内容不能为空!");
         return;
-      }else if(this.type==0){
+      } else if (this.type == 0) {
         this.$toast("请选择问题分类!");
         return;
       }
@@ -111,9 +115,9 @@ export default {
       let result = this.api.sendFeedBack({
         token: token.token,
         content: this.content,
-        type:this.type,
-        contact_way:this.phoneQQEmail,
-        pic:this.coverImg
+        type: this.type,
+        contact_way: this.phoneQQEmail,
+        pic: this.coverImg
       });
       if (result.error_code != 0) {
         this.$toast("反馈成功!");

@@ -49,7 +49,7 @@
       <div class="info-box flex-h">
         <div class="info-1 flex-h">
           <div class="info-1-1">车辆所在地：</div>
-          <div class="info-1-2">{{carInfo.province}} {{carInfo.city}}</div>
+          <div class="info-1-2">{{carInfo.province}} {{carInfo.city}} {{carInfo.area}}</div>
         </div>
         <div class="info-2 flex-h">
           <div class="info-2-1">过户次数：</div>

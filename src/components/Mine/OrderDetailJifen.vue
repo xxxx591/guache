@@ -57,7 +57,7 @@
       <div class="price">
         <div class="p-box flex-h">
           <div class="p-box-txt">商品金额</div>
-          <div class="p-box-price">¥{{orderDetails.amount}}</div>
+          <div class="p-box-price">{{orderDetails.amount}}积分</div>
         </div>
         <!-- <div class="p-box p-box-top flex-h">
           <div class="p-box-txt">运费</div>
@@ -65,7 +65,7 @@
         </div>-->
         <div class="p-box p-box-top flex-h">
           <div class="p-box-txt">合计</div>
-          <div class="p-box-price">¥{{orderDetails.amount}}</div>
+          <div class="p-box-price">{{orderDetails.amount}}积分</div>
         </div>
         <div class="p-line"></div>
       </div>
@@ -73,7 +73,7 @@
     <div class="info-box">
       <div class="info-item">订单编号：{{orderDetails.sn}}</div>
       <div class="info-item info-item-mg">下单时间：{{orderDetails.created_at}}</div>
-      <div class="info-item">支付方式：{{orderDetails.pay_type == 1?'微信支付':'支付宝支付'}}</div>
+      <!-- <div class="info-item">支付方式：{{orderDetails.pay_type == 1?'微信支付':'支付宝支付'}}</div> -->
     </div>
     <div class="bottom flex-h">
       <div class="b-left flex-h">

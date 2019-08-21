@@ -1,5 +1,5 @@
 module.exports = {
-  env: 1, // 1生成环境, 0开发环境
+  env: 0, // 1生成环境, 0开发环境
   url: 'http://gczj.sinmore.vip',
   // 获取验证码的倒计时长
   countNum: 60,
