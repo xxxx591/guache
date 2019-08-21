@@ -192,7 +192,7 @@ export default {
       // if (obj === '') return
       console.log('obj',obj);
       
-      this.$router.push({ name: obj.name })
+      // this.$router.push({ name: obj.name })
       // 此页面所有路由跳转都要调用此原生通知
       this.native.routerGoTo({
         url:
