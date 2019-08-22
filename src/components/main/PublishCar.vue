@@ -1,7 +1,7 @@
 <template>
   <div class="PublishCar">
     <div class="top">
-      <img src="../../assets/back-arrow.png" @click.stop="topBack" class="top-back">
+      <img src="../../assets/back-arrow.png" @click.stop="topBack" class="top-back" />
       <div class="top-txt">发布车辆</div>
       <div class="top-publish" @click.stop="publishArticle">发布</div>
     </div>
@@ -14,11 +14,11 @@
           @click.stop="deleteImg(item) "
           :key="index"
         >
-          <img :src="item" class="pic-img2">
-          <img src="../../assets/delete-img.png" alt class="pic-delete">
+          <img :src="item" class="pic-img2" />
+          <img src="../../assets/delete-img.png" alt class="pic-delete" />
         </div>
         <div class="pic-add flex-h flex-cc" @click.stop="uploadImg">
-          <img src="../../assets/add.png" class="pic-add-img">
+          <img src="../../assets/add.png" class="pic-add-img" />
         </div>
       </div>
       <div class="pic-line"></div>
@@ -35,7 +35,7 @@
     ></div>
     <div class="bottom">
       <div class="b-box flex-h" @click.stop="articleAddImg">
-        <img src="../../assets/img.png" class="b-box-img">
+        <img src="../../assets/img.png" class="b-box-img" />
         <div class="b-box-title">添加图片</div>
       </div>
     </div>
@@ -91,8 +91,8 @@ export default {
   },
   created() {
     this.form = this.$route.query;
-     let addr = this.form.selectedAddr.split(" ");
-      console.log("adddr--", addr[0], addr[1],addr[2]);
+    let addr = this.form.selectedAddr.split(" ");
+    console.log("adddr--", addr[0], addr[1], addr[2]);
   },
   methods: {
     // ...mapActions(["saveToken"]),
@@ -100,7 +100,8 @@ export default {
       window.scrollTo(0, 0);
     },
     async publishArticle() {
-      let content = encodeURIComponent(this.$refs.writeBox.innerHTML);
+      let content = (this.$refs.writeBox.innerHTML);
+      console.log("content", content);
       let addr = this.form.selectedAddr.split(" ");
       console.log("adddr--", addr[0], addr[1]);
       if (!content) {
@@ -127,7 +128,7 @@ export default {
         years: parseInt(this.form.selectedYear),
         province: addr[0],
         city: addr[1],
-        area:addr[2],
+        area: addr[2],
         count: this.form.selectedGuoHuNum,
         turbo: this.form.selectedDismiss,
         motor: this.form.engineData,
@@ -153,7 +154,7 @@ export default {
       console.log("publishArticle--result---", result);
     },
     pasteHtmlAtCaret(html, type) {
-    var sel;
+      var sel;
       var range;
       // if (window.getSelection) {
       sel = self.select;
