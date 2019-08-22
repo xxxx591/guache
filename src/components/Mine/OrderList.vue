@@ -1,7 +1,7 @@
 <template>
   <div class="OrderList" v-if="showFlag">
     <div class="top">
-      <img src="../../assets/back-arrow.png" @click.stop="topBack" class="top-back">
+      <img src="../../assets/back-arrow.png" @click.stop="topBack" class="top-back" />
       <div class="top-txt">订单列表</div>
     </div>
     <div class="tab flex-h">
@@ -29,7 +29,7 @@
           @click="ckDetails(item)"
         >
           <div class="p-left">
-            <img :src="item.cover" alt class="p-left-img">
+            <img :src="item.cover" alt class="p-left-img" />
           </div>
           <div class="p-right2 flex-v">
             <div class="p-title2">{{item.title}}</div>
@@ -66,7 +66,7 @@
           @click="ckDetails2(item)"
         >
           <div class="p-left">
-            <img :src="item.cover" alt class="p-left-img">
+            <img :src="item.cover" alt class="p-left-img" />
           </div>
           <div class="p-right2 flex-v">
             <div class="p-title2">{{item.title}}</div>
@@ -110,27 +110,26 @@ export default {
     ...mapState({
       // token: state => state.datas.token,
     }),
-    statusJifen(num){
-      return function (num) {
+    statusJifen(num) {
+      return function(num) {
         switch (num) {
           case 1:
-            return '待发货'
+            return "待发货";
             break;
           case 2:
-            return '待收货'
+            return "待收货";
             break;
           case 3:
-            return '交易完成'
+            return "交易完成";
             break;
-        
+
           default:
             break;
         }
-      }
+      };
     }
   },
   created() {
-     
     console.log("看看type是多少?", this.$route);
     if (this.$route.query.type == 2) {
       this.tabNum = 2;
@@ -157,7 +156,7 @@ export default {
       //   console.log("123");
       //   this.$router.back(-1);
       // } else {
-        this.native.back_btn({});
+      this.native.back_btn({});
       // }
     },
     async getOrderData(type = "order") {
@@ -272,6 +271,23 @@ export default {
         }
       });
     }
+  },
+  mounted() {
+    let self = this;
+    document.addEventListener(
+      "deviceready",
+      function() {
+        document.addEventListener(
+          "backbutton",
+          function() {
+            //TODO 实现自己的后退逻辑
+            self.native.back_btn({});
+          },
+          false
+        );
+      },
+      false
+    );
   }
 };
 </script>

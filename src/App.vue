@@ -2,10 +2,8 @@
   <div id="app">
     <!-- <transition :name="transitionName"></transition> -->
     <transition>
-        <router-view v-if=" isRouterAlive "></router-view>
+      <router-view v-if=" isRouterAlive "></router-view>
     </transition>
-
-    
 
     <div class="loading-box" v-show="showLoading">
       <div id="Loading">
@@ -81,10 +79,11 @@ export default {
 
     this.setMobileHeight(window.document.body.clientHeight);
 
-    // let token = await this.native.getToken({}); 
+    // let token = await this.native.getToken({});
   },
   mounted() {
-    this.setLoading(false);
+    let self = this; 
+    self.setLoading(false);
   }
 };
 </script>
@@ -202,11 +201,11 @@ export default {
   height: 80px !important;
   line-height: 80px !important;
 }
-.van-dialog{
-  font-size: 36px!important;
+.van-dialog {
+  font-size: 36px !important;
 }
-.van-dialog__message{
-      padding: 40px!important;
-  font-size: 32px!important;
+.van-dialog__message {
+  padding: 40px !important;
+  font-size: 32px !important;
 }
 </style>

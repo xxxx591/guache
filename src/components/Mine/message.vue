@@ -12,7 +12,7 @@
         v-for="(item, index) in scrollTitle"
         :key="index"
       >{{item.val+' '+item.num}}</div>
-      <div class="scroll-right">.</div>
+      <!-- <div class="scroll-right">.</div> -->
     </div>
     <div class="box flex-h" v-if="currentTab==0">
       <div class="fuwu-tuisong" v-for="(item,index) in tieziList" :key="index">
@@ -34,7 +34,7 @@
         </div>
       </div>
     </div>
-    <div class="box flex-h" v-if="currentTab==2">
+    <!-- <div class="box flex-h" v-if="currentTab==2">
       <div class="fuwu-tuisong" v-for="(item,index) in carList" :key="index">
         <div class="time-box">
           <p>{{item.created_at}}</p>
@@ -43,7 +43,7 @@
           <p>您发布的“{{item.used_car.name}}”{{item.status == 0?'已下架':'已上架'}}</p>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -58,7 +58,7 @@ export default {
       scrollTitle: [
         { val: "帖子", num: 0 },
         { val: "二手挂车", num: 0 },
-        { val: "二手牵引车", num: 0 }
+        // { val: "二手牵引车", num: 0 }
       ],
       shopList: [],
       tieziList: [],
@@ -96,15 +96,14 @@ export default {
       this.scrollTitle[0].num = data.data.count;
       arr.map(item => {
         console.log("ite,", item);
-        if (item.type == 2) {
-          this.carList.push(item);
-        } else {
-          this.shopList.push(item);
-        }
+        // if (item.type == 2) {
+        //   this.carList.push(item);
+        // } else {
+        this.shopList.push(item);
+        // }
       });
       console.log(this.carList);
-      this.scrollTitle[1].num = this.shopList.length;
-      this.scrollTitle[2].num = this.carList.length;
+      this.scrollTitle[1].num = arr.length;
       // this.changeTab(0);
       // let data1 = await this.api.getShops(params);
       // console.log("data1", data1);
@@ -179,8 +178,10 @@ export default {
     border-bottom: 2px solid #e5e5e5;
     align-items: center;
     overflow-x: scroll;
+    display: flex;
+    justify-content: space-around;
     .scroll-item {
-      margin-right: 120px;
+      // margin-right: 120px;
       white-space: nowrap;
       height: 88px;
       line-height: 100px;
