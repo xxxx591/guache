@@ -135,8 +135,8 @@ export default {
     async publishArticle() {
       if (this.jieliu) {
         this.jieliu = false;
-        let content = encodeURIComponent(this.$refs.writeBox.innerHTML);
-
+        let content = (this.$refs.writeBox.innerHTML);
+  console.log('content',content);
         // this.pasteHtmlAtCaret(`<img style="width=30px;height:30px;" src="http://www.sinmore.com.cn/Public/Home/images/news_1.jpg" alt="">`)
 
         if (

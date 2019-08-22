@@ -24,7 +24,7 @@ let post = (url, params) => {
       // 设置请求头
       headers: {
         // velo_admin: "nRF9L8ZaOKlE2lew",
-        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+        'Content-Type': 'application/x-www-form-urlencoded;'
       }
     })
       .then(response => {
@@ -35,28 +35,28 @@ let post = (url, params) => {
         if (response.data.error_msg == '数据冲突') {
           response.data.error_msg = '该手机号码已绑定'
         }
-        if (response.data.error_code == 1005 ) { 
+        if (response.data.error_code == 1005) {
           console.log('我走到这里来啦');
         }
-        if (response.data.error_code == 1012 ) {
+        if (response.data.error_code == 1012) {
           response.data.error_msg = '订单号不存在'
-          
+
         }
-        if (response.data.error_code == 9999 ) {
+        if (response.data.error_code == 9999) {
           response.data.error_msg = '账号积分不足'
         }
-        if (response.data && response.data.error_code  && response.data.error_code !== 1012) {
+        if (response.data && response.data.error_code && response.data.error_code !== 1012) {
           Toast({
             message: response.data.error_msg,
             position: 'top',
             duration: 1500
           })
         }
-        let data ;
-        if (response.data == undefined  || JSON.stringify(response.data)=='{}') {
+        let data;
+        if (response.data == undefined || JSON.stringify(response.data) == '{}') {
           data = response
-        }else{
-          data= response.data
+        } else {
+          data = response.data
         }
         resolve(data)
       })
@@ -467,7 +467,12 @@ api.deleteAddr = obj => {
 // 圈子, 发布内容
 api.quanPublishArticle = obj => {
   return new Promise(async (resolve, reject) => {
-    let data = await post(`${config.url}/api/note/add`, obj || {})
+
+    let data = await post(`${config.url}/api/note/add`, obj || {}, {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }
+    })
     resolve(data)
   })
 }
