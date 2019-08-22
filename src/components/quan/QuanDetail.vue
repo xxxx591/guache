@@ -126,9 +126,17 @@ export default {
       }
     }
   },
-  created() {
+  async created() {
+    if (this.$route.query.token == undefined) {
+      let token = await this.native.getToken({});
+      this.token = token.token;
+    } else {
+      this.token = this.$route.query.token;
+    }
+
     this.getDetail(this.$route.query.id);
     this.getComments(this.$route.query.id);
+    console.log(this.$route.query.token); 
   },
   methods: {
     tempClick() {},
@@ -150,9 +158,9 @@ export default {
       window.scrollTo(0, 0);
     },
     async shoucang() {
-      let token = await this.native.getToken({});
+      // let token = await this.native.getToken({});
       let params = {
-        token: token,
+        token: this.token,
         note_id: this.articleDetail.id
       };
       let data = await this.api.quanNoteCollect(params);
@@ -160,10 +168,10 @@ export default {
       this.articleDetail.is_collect = data.data.is_collect;
     },
     async getDetail(id) {
-      let token = await this.native.getToken({});
+      // let token = await this.native.getToken({});
       let detail = await this.api.quanArticleDetail({
         note_id: id,
-        token: token.token
+        token: this.token
       });
       detail.data.content = decodeURIComponent(detail.data.content);
       this.articleDetail = detail.data;
@@ -182,9 +190,9 @@ export default {
     async sendComment() {
       if (this.jieliu) {
         this.jieliu = false;
-        let token = await this.native.getToken({});
+        // let token = await this.native.getToken({});
         let result = await this.api.sendComment({
-          token: token.token,
+          token: this.token,
           note_id: this.$route.query.id,
           content: this.commentText
         });
@@ -211,7 +219,9 @@ export default {
       this.native.share({
         url:
           "http://guacheapi.sinmore.vip/#/Quan/QuanDetail?id=" +
-          this.$route.query.id,
+          this.$route.query.id +
+          "&token=" +
+          this.token,
         title: this.articleDetail.title,
         desc: "挂车之家给您分享了一篇文章，点击查看",
         thumb: "xxxxx",
