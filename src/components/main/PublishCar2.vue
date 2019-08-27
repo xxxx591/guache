@@ -41,7 +41,8 @@
     <div class="box flex-h">
       <div class="left flex-h">
         <div class="txt">车辆价格：</div>
-        <input type="tel" placeholder="请输入车辆价格" v-model="form.price" class="value">
+        <input type="number" placeholder="请输入车辆价格" v-model="form.price" class="value">
+        <div class="txt">万</div>
       </div>
     </div>
     <div class="box flex-h" @click.stop="isShowSelectYearBox = !isShowSelectYearBox">

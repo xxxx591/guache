@@ -1,30 +1,41 @@
 <template>
   <div
-    class="SecondCarQian"
-    v-bind:style="{height: mobileHeight + 'px'}"
-    :class="{'over-hide': isShowSelectedBrandBox || isShowSelectedPriceBox}"
+    class="SecondCar"
+    :class="{'over-hide': isShowSelectedColorBox || isShowSelectedPriceBox || isShowSelectedYearBox || isShowSelectedWeightBox }"
   >
-    <div class="top-fixeed">
+    <div class="top-fixed">
       <div class="top">
-        <img src="../../assets/back-arrow.png" @click.stop="topBack" class="top-back">
-        <div class="top-txt">二手牵引车</div>
+        <img src="../../assets/back-arrow.png" @click.stop="topBack" class="top-back" />
+        <div class="top-txt">二手挂车</div>
         <img
           src="../../assets/publish.png"
           class="publish"
           @click.stop="$router.push({name: 'PublishCar2', query: {type: 2}})"
-        >
+        />
       </div>
       <div class="select flex-h">
-        <div class="s-box" @click.stop="isShowSelectedBrandBox = !isShowSelectedBrandBox">
+        <div class="s-box" @click.stop="isShowSelectedColorBox = !isShowSelectedColorBox">
           <div class="s-box2 flex-h flex-cc">
-            <div class="s-txt">{{selectedBrand ? selectedBrand : '品牌'}}</div>
-            <img src="../../assets/arrow-bottom.png" class="s-icon">
+            <div class="s-txt">{{selectedColor || '颜色'}}</div>
+            <img src="../../assets/arrow-bottom.png" class="s-icon" />
           </div>
         </div>
         <div class="s-box" @click.stop="isShowSelectedPriceBox = !isShowSelectedPriceBox">
           <div class="s-box2 flex-h flex-cc">
-            <div class="s-txt">{{selectedPrice ? selectedPrice + '万' : '价格'}}</div>
-            <img src="../../assets/arrow-bottom.png" class="s-icon">
+            <div class="s-txt">{{selectedPrice || '价格'}}</div>
+            <img src="../../assets/arrow-bottom.png" class="s-icon" />
+          </div>
+        </div>
+        <div class="s-box" @click.stop="isShowSelectedYearBox = !isShowSelectedYearBox">
+          <div class="s-box2 flex-h flex-cc">
+            <div class="s-txt">{{selectedYear || '年限'}}</div>
+            <img src="../../assets/arrow-bottom.png" class="s-icon" />
+          </div>
+        </div>
+        <div class="s-box" @click.stop="isShowSelectedWeightBox = !isShowSelectedWeightBox">
+          <div class="s-box2 flex-h flex-cc">
+            <div class="s-txt">{{selectedWeight || '吨位'}}</div>
+            <img src="../../assets/arrow-bottom.png" class="s-icon" />
           </div>
         </div>
       </div>
@@ -32,22 +43,23 @@
     <div class="product-box">
       <div
         class="product flex-h"
+        v-for="(item, index) in carList"
         @click.stop="gotoPage({name: 'SecondCarDetail', query: { productid: item.id }, params: { product: item }, pageUrl: '/index/SecondCarDetail'})"
-        v-for="(item, index) in list"
         :key="index"
       >
         <div class="p-left">
-          <img :src="item.get_pic && item.get_pic[0].pic" class="p-left-img">
+          <img :src="item.get_pic && item.get_pic[0].pic" class="p-left-img" />
           <div class="p-time">{{item.created_at}}</div>
         </div>
         <div class="p-right flex-v">
           <div class="p-top">
             <div class="p-title">{{item.name}}</div>
             <div class="p-des">{{item.desc}}</div>
+            <div class="p-price">￥{{item.price}}万</div>
           </div>
           <div class="p-bottom flex-h">
             <div class="p-mark flex-h">{{item.get_colour.name}}</div>
-            <div class="p-mark flex-h">{{item.price}}万</div>
+            <!-- <div class="p-mark flex-h">{{item.price}}万</div> -->
             <div class="p-mark flex-h">{{item.years}}年</div>
             <div class="p-mark flex-h">{{item.load}}吨</div>
           </div>
@@ -55,13 +67,53 @@
       </div>
     </div>
 
+    <div
+      class="pop-box"
+      v-show="isShowSelectedColorBox"
+      @click.stop="isShowSelectedColorBox = !isShowSelectedColorBox"
+    >
+      <div class="pop-mask">
+        <div class="select-color flex-v flex-cc">
+          <div class="sc-title">选择颜色</div>
+          <div
+            class="sc-color"
+            @click.stop="selectColor(item)"
+            v-for="(item, index) in colorList"
+            :key="index"
+          >{{item.name}}</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 选择年限弹框 -->
+    <!-- @click.stop="isShowSelectedYearBox = !isShowSelectedYearBox" -->
+    <div
+      class="select-box1"
+      v-show="isShowSelectedYearBox"
+      @click.stop="isShowSelectedYearBox = !isShowSelectedYearBox"
+      @mousemove.stop="tempMove"
+    >
+      <div class="select-box s-year">
+        <div class="select-box-txt">
+          <div class="seb-box flex-h flex-cc">
+            <div
+              class="seb-box-cancel flex-h flex-cc"
+              @click.stop="isShowSelectedYearBox = !isShowSelectedYearBox"
+            >取消</div>
+            <div class="seb-box-certain flex-h flex-cc" @click.stop="certainSelectYear">确定</div>
+          </div>
+        </div>
+        <mt-picker :slots="yearSlots" @change="selectYear"></mt-picker>
+      </div>
+    </div>
+
     <!-- 选择价格弹框 -->
     <!-- @click.stop="isShowSelectedPriceBox = !isShowSelectedPriceBox" -->
     <div
       class="select-box1"
-      @mousemove.stop.prevent="tempMove"
       v-show="isShowSelectedPriceBox"
       @click.stop="isShowSelectedPriceBox = !isShowSelectedPriceBox"
+      @mousemove.stop="tempMove"
     >
       <div class="select-box s-year">
         <div class="select-box-txt">
@@ -77,25 +129,25 @@
       </div>
     </div>
 
-    <!-- 选择品牌弹框 -->
-    <!-- @click.stop="isShowSelectedBrandBox = !isShowSelectedBrandBox" -->
+    <!-- 选择吨位弹框 -->
+    <!-- @click.stop="isShowSelectedWeightBox = !isShowSelectedWeightBox" -->
     <div
       class="select-box1"
-      @mousemove.stop.prevent="tempMove"
-      v-show="isShowSelectedBrandBox"
-      @click.stop="isShowSelectedBrandBox = !isShowSelectedBrandBox"
+      v-show="isShowSelectedWeightBox"
+      @click.stop="isShowSelectedWeightBox = !isShowSelectedWeightBox"
+      @mousemove.stop="tempMove"
     >
       <div class="select-box s-year">
         <div class="select-box-txt">
           <div class="seb-box flex-h flex-cc">
             <div
               class="seb-box-cancel flex-h flex-cc"
-              @click.stop="isShowSelectedBrandBox = !isShowSelectedBrandBox"
+              @click.stop="isShowSelectedWeightBox = !isShowSelectedWeightBox"
             >取消</div>
-            <div class="seb-box-certain flex-h flex-cc" @click.stop="certainSelectBrand">确定</div>
+            <div class="seb-box-certain flex-h flex-cc" @click.stop="certainSelectWeight">确定</div>
           </div>
         </div>
-        <mt-picker :slots="yearSlots" @change="SelectBrand"></mt-picker>
+        <mt-picker :slots="weightSlots" @change="selectWeight"></mt-picker>
       </div>
     </div>
   </div>
@@ -104,21 +156,27 @@
 <script>
 // import { Toast } from 'mint-ui'
 import { mapActions, mapState } from "vuex";
+import { close } from "fs";
 
 export default {
-  name: "SecondCarQian",
+  name: "SecondCar",
   data() {
     return {
-      list: [],
-      brands: [],
-      priceSlots: [
-        {
-          flex: 1,
-          values: [],
-          className: "slot1",
-          textAlign: "center"
-        }
-      ],
+      msg: "发布车辆",
+      carList: [],
+      colorList: [],
+      selectedColor: "",
+      selectedColorId: "",
+      selectedPrice: "",
+      selectedTempPrice: "",
+      selectedYear: "",
+      selectedTempYear: "",
+      selectedWeight: "",
+      selectedTempWeight: "",
+      isShowSelectedColorBox: false,
+      isShowSelectedPriceBox: false,
+      isShowSelectedYearBox: false,
+      isShowSelectedWeightBox: false,
       yearSlots: [
         {
           flex: 1,
@@ -127,53 +185,81 @@ export default {
           textAlign: "center"
         }
       ],
-      isShowSelectedPriceBox: false,
-      selectedTempPrice: "",
-      selectedPrice: 0,
-      isShowSelectedBrandBox: false,
-      selectedBrand: "",
-      selectedTempBrand: ""
+      priceSlots: [
+        {
+          flex: 1,
+          values: [],
+          className: "slot1",
+          textAlign: "center"
+        }
+      ],
+      weightSlots: [
+        {
+          flex: 1,
+          values: [],
+          className: "slot1",
+          textAlign: "center"
+        }
+      ],
+      searchCondition: {
+        color: "",
+        price: "",
+        year: "",
+        weight: ""
+      }
     };
   },
   computed: {
     ...mapState({
       token: state => state.datas.token,
       mobileHeight: state => state.datas.mobileHeight
-    })
+    }),
+    setColors(str) {
+      let self = this;
+      return function(str) {
+        let color = "";
+        console.log(str);
+        self.colorList.forEach(item => {
+          if (item.id == str) {
+            color = item.name;
+          }
+          return color;
+        });
+      };
+    }
   },
-  async mounted() {
+  async created() {
     var u = navigator.userAgent;
     var isAndroid = u.indexOf("Android") > -1 || u.indexOf("Adr") > -1;
     if (isAndroid) {
       console.log("token", this.$route.query.token);
       this.$store.state.datas.token = this.$route.query.token;
       this.getQianCarList();
-      this.getBrands();
-      this.createPrice();
+      this.getColorList();
+      this.createYear();
+      this.createColor();
+      this.createWeight();
     } else {
       this.$store.state.datas.token = await this.native.getToken({});
       this.getQianCarList();
-      this.getBrands();
-      this.createPrice();
+      this.getColorList();
+      this.createYear();
+      this.createColor();
+      this.createWeight();
     }
   },
   methods: {
-    tempMove() {},
     // ...mapActions(["saveToken"]),
     inputBlur() {
       window.scrollTo(0, 0);
     },
-    topBack() {
-      this.native.back_btn({});
-      // this.$router.back(-1)
-    },
-    gotoPage(obj) {
-      if (obj === "") return;
-      this.$router.push({
-        name: obj.name,
-        query: obj.query || {},
-        params: obj.params || {}
-      });
+    tempClick() {},
+    tempMove() {},
+    async getColorList() {
+      let list = await this.api.getAllColors({});
+      list.data.unshift({ id: 0, name: "全部" });
+      this.colorList = list.data;
+      // console.log('color--list--', list)
     },
     async getQianCarList() {
       console.log("host", window.location.host);
@@ -190,17 +276,53 @@ export default {
       list.data.data.forEach((item, index) => {
         item.created_at = item.created_at.substr(0, 10);
       });
-      this.list = list.data.data;
+      this.carList = list.data.data;
     },
-    async getBrands() {
-      let list = await this.api.carCategory({ pid: 0 });
-      this.brands = list.data;
 
+    selectColor(item) {
+      this.selectedColorId = item.id;
+      this.selectedColor = item.name;
+      this.isShowSelectedColorBox = !this.isShowSelectedColorBox;
+      this.doSearch();
+    },
+    createYear() {
+      let nowYear = 1;
       this.yearSlots[0].values.push("无");
-      this.yearSlots[0].values.push();
-      for (let i = 0; i < this.brands.length; i++) {
-        this.yearSlots[0].values.push(this.brands[i].title);
+      this.yearSlots[0].values.push(nowYear);
+      for (let i = 0; i < 9; i++) {
+        this.yearSlots[0].values.push(++nowYear);
       }
+    },
+    createColor() {
+      let nowPrice = 1;
+      this.priceSlots[0].values.push("请选择");
+      this.priceSlots[0].values.push("10万元以上");
+      this.priceSlots[0].values.push("20万元以上");
+      this.priceSlots[0].values.push("30万元以上");
+      this.priceSlots[0].values.push("40万元以上");
+      this.priceSlots[0].values.push("50万元以上");
+    },
+    createWeight() {
+      let nowWeight = 1;
+      this.weightSlots[0].values.push("无");
+      this.weightSlots[0].values.push(nowWeight);
+      for (let i = 0; i < 49; i++) {
+        this.weightSlots[0].values.push(++nowWeight);
+      }
+    },
+    selectYear(e, year) {
+      this.selectedTempYear = year[0];
+    },
+    selectPrice(e, price) {
+      this.selectedTempPrice = price[0];
+    },
+    certainSelectYear() {
+      if (this.selectedTempYear === "无") {
+        this.selectedTempYear = "";
+      }
+      this.selectedYear = this.selectedTempYear;
+      this.isShowSelectedYearBox = !this.isShowSelectedYearBox;
+      this.doSearch();
     },
     certainSelectPrice() {
       if (this.selectedTempPrice === "请选择") {
@@ -210,79 +332,102 @@ export default {
       this.isShowSelectedPriceBox = !this.isShowSelectedPriceBox;
       this.doSearch();
     },
+    certainSelectWeight() {
+      if (this.selectedTempWeight === "无") {
+        this.selectedTempWeight = "";
+      }
+      this.selectedWeight = this.selectedTempWeight;
+      this.isShowSelectedWeightBox = !this.isShowSelectedWeightBox;
+      this.doSearch();
+    },
+    selectWeight(e, weight) {
+      this.selectedTempWeight = weight[0];
+    },
+    // 筛选
     async filterSecondCar() {
-      //
-      let brandId = "";
-      this.brands.forEach((item, index) => {
-        if (item.title === this.selectedBrand) {
-          brandId = item.id;
-        }
-      });
       let list = await this.api.filterSecondCar({
         page: 1,
         pagesize: 1000,
+        colour_id: this.selectedColorId,
         price: this.selectedPrice,
-        vehicle_id: brandId,
+        years: this.selectedYear,
+        load: this.selectedWeight,
+        vehicle_id: "",
+        type: 2
+        
+      });
+      list.data.data.forEach((item, index) => {
+        item.created_at = item.created_at.substr(0, 10);
+      });
+      this.carList = list.data.data;
+    },
+    async getSecondCarList() {
+      // let token = await this.native.getToken({});
+      let list = await this.api.secondHandCarList({
+        token: this.$store.state.datas.token,
+        page: 1,
+        pagesize: 1000,
         type: 2
       });
       list.data.data.forEach((item, index) => {
         item.created_at = item.created_at.substr(0, 10);
       });
-      if (list.data.data.length === 0) this.$toast("没有数据!");
-      this.list = list.data.data;
-    },
-    selectPrice(e, price) {
-      this.selectedTempPrice = price[0];
-    },
-    certainSelectBrand() {
-      if (this.selectedTempBrand === "无") {
-        this.selectedTempBrand = "";
-      }
-      this.selectedBrand = this.selectedTempBrand;
-      this.isShowSelectedBrandBox = !this.isShowSelectedBrandBox;
-      this.doSearch();
-    },
-    SelectBrand(e, year) {
-      this.selectedTempBrand = year[0];
-    },
-    createPrice() {
-      let nowPrice = 1;
-      this.priceSlots[0].values.push("请选择");
-      this.priceSlots[0].values.push("10万以上");
-      this.priceSlots[0].values.push("20万以上");
-      this.priceSlots[0].values.push("30万以上");
-      this.priceSlots[0].values.push("40万以上");
-      this.priceSlots[0].values.push("50万以上");
-       
+      this.carList = list.data.data;
+      console.log(this.carList);
+      // console.log('list---', list)
     },
     doSearch() {
-      console.log("搜索--selectedPrice---", this.selectedPrice);
+      console.log("搜索");
+      console.log(this.selectedColor);
+      console.log(this.selectedPrice);
+      console.log(this.selectedYear);
+      console.log(this.selectedWeight);
       let tempArr = [];
-      if (!this.selectedPrice && !this.selectedBrand) {
-        this.getQianCarList();
+      if (
+        !this.selectedColor &&
+        !this.selectedPrice &&
+        !this.selectedYear &&
+        !this.selectedWeight
+      ) {
+        this.getSecondCarList();
       } else {
         this.filterSecondCar();
       }
+    },
+    topBack() {
+      this.native.back_btn({});
+      // this.$router.back(-1)
+    },
+    gotoPage(obj) {
+      if (obj === "") return;
+      this.$router.push({
+        name: obj.name,
+        query: obj.query || {},
+        params: obj.params || {}
+      });
+      // 此页面所有路由跳转都要调用此原生通知
+      // this.native.routerGoTo({ url: 'http://gczj.sinmore.vip/html/#' + obj.pageUrl })
     }
   }
 };
 </script>
 
 <style lang='less' scoped>
-.SecondCarQian {
-  background: #ffffff;
-  // min-height: 100vh;
-  // max-height: 100vh;
+.SecondCar {
+  padding-bottom: 100px;
+  height: 100vh;
+  width: 100vw;
+  box-sizing: border-box;
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
+  background: #ffffff;
   padding-top: 200px;
-  padding-bottom: 100px;
-  box-sizing: border-box;
-  .top-fixeed {
-    width: 100%;
+  .top-fixed {
     position: fixed;
+    width: 100%;
     top: 0;
-    z-index: 1;
+    z-index: 999;
+    background: #ffffff;
     .top {
       height: 85px;
       position: relative;
@@ -375,6 +520,7 @@ export default {
         margin-left: 30px;
         flex-grow: 1;
         justify-content: space-between;
+        position: relative;
         .p-top {
           .p-title {
             font-size: 32px;
@@ -394,6 +540,13 @@ export default {
             -webkit-line-clamp: 2;
             text-overflow: ellipsis;
             overflow: hidden;
+            margin-top: 10px;
+          }
+          .p-price {
+            font-size: 0.4rem;
+            line-height: 0.4rem;
+            color: #ff5d25;
+            font-weight: bold;
             margin-top: 10px;
           }
         }
@@ -452,6 +605,37 @@ export default {
     }
     .s-year {
       height: 400px;
+    }
+  }
+}
+.pop-box {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  overflow: hidden;
+  z-index: 9;
+  .pop-mask {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #ffffff;
+    border-radius: 10px;
+    .select-color {
+      width: 400px;
+      padding: 30px 0;
+      .sc-title {
+        font-size: 36px;
+        font-weight: bold;
+        margin-bottom: 20px;
+      }
+      .sc-color {
+        font-size: 30px;
+        padding: 10px 0;
+      }
     }
   }
 }

@@ -5,37 +5,37 @@
   >
     <div class="top-fixed">
       <div class="top">
-        <img src="../../assets/back-arrow.png" @click.stop="topBack" class="top-back">
+        <img src="../../assets/back-arrow.png" @click.stop="topBack" class="top-back" />
         <div class="top-txt">二手挂车</div>
         <img
           src="../../assets/publish.png"
           class="publish"
           @click.stop="$router.push({name: 'PublishCar2', query: {type: 1}})"
-        >
+        />
       </div>
       <div class="select flex-h">
         <div class="s-box" @click.stop="isShowSelectedColorBox = !isShowSelectedColorBox">
           <div class="s-box2 flex-h flex-cc">
             <div class="s-txt">{{selectedColor || '颜色'}}</div>
-            <img src="../../assets/arrow-bottom.png" class="s-icon">
+            <img src="../../assets/arrow-bottom.png" class="s-icon" />
           </div>
         </div>
         <div class="s-box" @click.stop="isShowSelectedPriceBox = !isShowSelectedPriceBox">
           <div class="s-box2 flex-h flex-cc">
             <div class="s-txt">{{selectedPrice || '价格'}}</div>
-            <img src="../../assets/arrow-bottom.png" class="s-icon">
+            <img src="../../assets/arrow-bottom.png" class="s-icon" />
           </div>
         </div>
         <div class="s-box" @click.stop="isShowSelectedYearBox = !isShowSelectedYearBox">
           <div class="s-box2 flex-h flex-cc">
             <div class="s-txt">{{selectedYear || '年限'}}</div>
-            <img src="../../assets/arrow-bottom.png" class="s-icon">
+            <img src="../../assets/arrow-bottom.png" class="s-icon" />
           </div>
         </div>
         <div class="s-box" @click.stop="isShowSelectedWeightBox = !isShowSelectedWeightBox">
           <div class="s-box2 flex-h flex-cc">
             <div class="s-txt">{{selectedWeight || '吨位'}}</div>
-            <img src="../../assets/arrow-bottom.png" class="s-icon">
+            <img src="../../assets/arrow-bottom.png" class="s-icon" />
           </div>
         </div>
       </div>
@@ -48,17 +48,18 @@
         :key="index"
       >
         <div class="p-left">
-          <img :src="item.get_pic && item.get_pic[0].pic" class="p-left-img">
+          <img :src="item.get_pic && item.get_pic[0].pic" class="p-left-img" />
           <div class="p-time">{{item.created_at}}</div>
         </div>
         <div class="p-right flex-v">
           <div class="p-top">
             <div class="p-title">{{item.name}}</div>
             <div class="p-des">{{item.desc}}</div>
+            <div class="p-price">￥{{item.price}}万</div>
           </div>
           <div class="p-bottom flex-h">
             <div class="p-mark flex-h">{{item.get_colour.name}}</div>
-            <div class="p-mark flex-h">{{item.price}}万</div>
+            <!-- <div class="p-mark flex-h">{{item.price}}万</div> -->
             <div class="p-mark flex-h">{{item.years}}年</div>
             <div class="p-mark flex-h">{{item.load}}吨</div>
           </div>
@@ -282,14 +283,7 @@ export default {
       this.doSearch();
     },
     createYear() {
-      // let year = new Date()
-      // let nowYear = year.getFullYear()
-      // this.yearSlots[0].values.push('')
-      // this.yearSlots[0].values.push(nowYear)
-      // for (let i = 0; i < 11; i++) {
-      //   this.yearSlots[0].values.push(--nowYear)
-      // }
-
+   
       let nowYear = 1;
       this.yearSlots[0].values.push("无");
       this.yearSlots[0].values.push(nowYear);
@@ -305,7 +299,6 @@ export default {
       this.priceSlots[0].values.push("30万元以上");
       this.priceSlots[0].values.push("40万元以上");
       this.priceSlots[0].values.push("50万元以上");
-       
     },
     createWeight() {
       let nowWeight = 1;
@@ -509,6 +502,7 @@ export default {
         margin-left: 30px;
         flex-grow: 1;
         justify-content: space-between;
+        position: relative;
         .p-top {
           .p-title {
             font-size: 32px;
@@ -528,6 +522,13 @@ export default {
             -webkit-line-clamp: 2;
             text-overflow: ellipsis;
             overflow: hidden;
+            margin-top: 10px;
+          }
+          .p-price {
+            font-size: 0.4rem;
+            line-height: 0.4rem;
+            color: #ff5d25;
+            font-weight: bold;
             margin-top: 10px;
           }
         }
