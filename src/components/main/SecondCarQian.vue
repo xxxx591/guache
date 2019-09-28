@@ -6,7 +6,7 @@
     <div class="top-fixed">
       <div class="top">
         <img src="../../assets/back-arrow.png" @click.stop="topBack" class="top-back" />
-        <div class="top-txt">二手挂车</div>
+        <div class="top-txt">二手牵引车</div>
         <img
           src="../../assets/publish.png"
           class="publish"

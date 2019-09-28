@@ -208,4 +208,14 @@ export default {
   padding: 40px !important;
   font-size: 32px !important;
 }
+.van-icon.van-icon-search {
+  display: block;
+  min-width: 1em;
+  font-size: 0.513333rem;
+  line-height: inherit;
+  color: #ccc;
+}
+.van-field__control{
+  font-size:0.186667rem;
+}
 </style>

@@ -563,8 +563,8 @@ export default {
       //   this.$toast("过户次数不得超过10!");
       //   return false;
       // }
-      if (this.form.carName === "") {
-        this.$toast("车辆名称不能为空!");
+      if (this.form.carName === "" || this.form.carName.length>=20) {
+        this.$toast("车辆名称不能为空且不能超过20字");
         return false;
       }
       if (this.form.des === "") {

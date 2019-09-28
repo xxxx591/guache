@@ -601,6 +601,13 @@ api.quanProductList = obj => {
     resolve(data)
   })
 }
+// 给圈子点赞
+api.quanDianzan = obj => {
+  return new Promise(async (resolve, reject) => {
+    let data = await post(`${config.url}/api/note/noteLike`, obj || {})
+    resolve(data)
+  })
+}
 
 // 获取圈子文章详情
 api.quanArticleDetail = obj => {

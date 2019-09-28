@@ -3,7 +3,7 @@
     <div class="top">
       <img src="../../assets/back-arrow.png" @click.stop="topBack" class="top-back" />
       <div class="top-txt">文章详情</div>
-      <span style="position: absolute;right: 0.4rem;" @click="yaoqing">···</span>
+      <!-- <span style="position: absolute;right: 0.4rem;" @click="yaoqing">···</span> -->
     </div>
     <div class="box">
       <div class="title">{{articleDetail.title}}</div>
@@ -39,13 +39,42 @@
     <div class="bottom">
       <div class="bottom-box flex-h">
         <div class="b-input flex-h" @click.stop="pinglun">请输入要评论的内容</div>
+        <div class="b-star" v-if="articleDetail.is_like==0">
+          <img
+            src="../../assets/undianzan.png"
+            alt
+            class="b-img"
+            @click.stop="dianzan"
+            style="width: 0.486667rem;height: 0.486667rem;"
+          />
+          <div class="b-num">{{articleDetail.like_count}}</div>
+        </div>
+        <div class="b-star" v-if="articleDetail.is_like==1">
+          <img
+            src="../../assets/dianzan.png"
+            alt
+            class="b-img"
+            @click.stop="dianzan"
+            style="width: 0.486667rem;height: 0.486667rem;"
+          />
+          <div class="b-num">{{articleDetail.like_count}}</div>
+        </div>
         <div class="b-star" v-if="articleDetail.is_collect==0">
-          <img src="../../assets/shoucang.png" alt class="b-img" @click="shoucang" />
+          <img src="../../assets/shoucang.png" alt class="b-img" @click.stop="shoucang" />
           <div class="b-num">{{articleDetail.collect_count}}</div>
         </div>
         <div class="b-star" v-if="articleDetail.is_collect==1">
-          <img src="../../assets/shoucang-on.png" alt class="b-img" @click="shoucang" />
+          <img src="../../assets/shoucang-on.png" alt class="b-img" @click.stop="shoucang" />
           <div class="b-num">{{articleDetail.collect_count}}</div>
+        </div>
+        <div class="b-star" style="margin-left: 0.6rem;">
+          <img
+            src="../../assets/fenxiang2.png"
+            alt
+            class="b-img"
+            @click.stop="yaoqing"
+            style="width: 0.486667rem;height: 0.486667rem;"
+          />
         </div>
       </div>
     </div>
@@ -136,7 +165,7 @@ export default {
 
     this.getDetail(this.$route.query.id);
     this.getComments(this.$route.query.id);
-    console.log(this.$route.query.token); 
+    console.log(this.$route.query.token);
   },
   methods: {
     tempClick() {},
@@ -156,6 +185,21 @@ export default {
     },
     shiqu() {
       window.scrollTo(0, 0);
+    },
+    async dianzan() {
+      let data = await this.api.quanDianzan({
+        token: this.token,
+        note_id: this.articleDetail.id
+      });
+      if (data.error_code == 0) {
+        if (this.articleDetail.is_like == 1) {
+          this.articleDetail.is_like = 0;
+          this.articleDetail.like_count--;
+        } else {
+          this.articleDetail.is_like = 1;
+          this.articleDetail.like_count++;
+        }
+      }
     },
     async shoucang() {
       // let token = await this.native.getToken({});
@@ -386,7 +430,7 @@ export default {
       background: #ffffff;
       // padding:
       .b-input {
-        width: 600px;
+        width: 470px;
         height: 70px;
         background: #f7f8fa;
         font-size: 28px;

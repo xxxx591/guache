@@ -29,6 +29,7 @@ import PublishCar2 from '@/components/main/PublishCar2'
 import QuanMain from '@/components/quan/Main'
 import QuanPublish from '@/components/quan/QuanPublish'
 import QuanDetail from '@/components/quan/QuanDetail'
+import Search from '@/components/quan/Search'
 
 import LoveCar from '@/components/car/LoveCar'
 import ChooseCar from '@/components/car/ChooseCar'
@@ -249,6 +250,11 @@ export default new Router({
       path: '/Quan/QuanDetail',
       name: 'QuanDetail',
       component: QuanDetail
+    },
+    {
+      path: '/Quan/Search',
+      name: 'Search',
+      component: Search
     },
     {
       path: '/Car/ChooseCar',
