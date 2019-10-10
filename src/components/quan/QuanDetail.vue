@@ -38,7 +38,7 @@
     </div>
     <div class="bottom">
       <div class="bottom-box flex-h">
-        <div class="b-input flex-h" @click.stop="pinglun">请输入要评论的内容</div>
+        <div class="b-input flex-h" @click.stop="pinglun" :class="{'show-hidden': type == 1008}">请输入要评论的内容</div>
         <div class="b-star" v-if="articleDetail.is_like==0">
           <img
             src="../../assets/undianzan.png"
@@ -102,6 +102,7 @@
             placeholder="请输入要评论的内容"
             ref="myInput"
             @blur="shiqu"
+            
           ></textarea>
         </div>
       </div>
@@ -150,7 +151,8 @@ export default {
       commentText: "",
       isShowommentBox: false,
       jieliu: true,
-      show: false
+      show: false,
+      type:''
     };
   },
   computed: {
@@ -174,7 +176,7 @@ export default {
     } else {
       this.token = this.$route.query.token;
     }
-
+    this.type = this.$route.query.type
     this.getDetail(this.$route.query.id);
     this.getComments(this.$route.query.id);
     console.log(this.$route.query.token);
@@ -277,7 +279,7 @@ export default {
           "http://guacheapi.sinmore.vip/#/Quan/QuanDetail?id=" +
           this.$route.query.id +
           "&token=" +
-          this.token,
+          this.token + "&type=1008",
         title: this.articleDetail.title,
         desc: "挂车之家给您分享了一篇文章，点击查看",
         thumb: "xxxxx",
@@ -608,6 +610,9 @@ export default {
         height: 1.6rem /* 120/75 */;
       }
     }
+  }
+  .show-hidden{
+    visibility: hidden!important;
   }
 }
 </style>
