@@ -117,6 +117,19 @@ export default {
   height: 1rem;
   padding: 0.1rem;
   border-bottom: 1px solid #e5e5e5;
+  .van-icon.van-icon-search {
+    display: block;
+    min-width: 1em;
+    font-size: 40px !important;
+    line-height: inherit;
+    color: #ccc;
+  }
+  .van-field__control {
+    font-size: 28px !important;
+  }
+  .van-search__action {
+    font-size: 28px !important;
+  }
 }
 .van-search__content {
   height: 1rem;

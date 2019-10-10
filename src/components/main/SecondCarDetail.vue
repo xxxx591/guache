@@ -83,9 +83,21 @@
             <img src="../../assets/yaoqing_qq.png" />
             <span>微信好友</span>
           </p>
+          <p @click="fenxiang('5')">
+            <img src="../../assets/pengyouquan.png" />
+            <span>朋友圈</span>
+          </p>
           <p @click="fenxiang('2')">
             <img src="../../assets/yaoqing_wx.png" />
             <span>QQ好友</span>
+          </p>
+          <p @click="fenxiang('3')">
+            <img src="../../assets/weibo.png" />
+            <span>微博</span>
+          </p>
+          <p @click="fenxiang('4')">
+            <img src="../../assets/kongjian.png" />
+            <span>QQ空间</span>
           </p>
         </div>
       </div>
@@ -399,8 +411,11 @@ export default {
         color: rgba(51, 51, 51, 1);
       }
       img {
-        width: 1.6rem /* 120/75 */;
-        height: 1.6rem /* 120/75 */;
+        width: 1rem /* 120/75 */;
+        height: 1rem /* 120/75 */;
+      }
+      span{
+        display: block;
       }
     }
   }

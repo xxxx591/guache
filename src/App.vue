@@ -82,7 +82,7 @@ export default {
     // let token = await this.native.getToken({});
   },
   mounted() {
-    let self = this; 
+    let self = this;
     self.setLoading(false);
   }
 };
@@ -211,11 +211,21 @@ export default {
 .van-icon.van-icon-search {
   display: block;
   min-width: 1em;
-  font-size: 0.513333rem;
+  font-size: 40px !important;
   line-height: inherit;
   color: #ccc;
 }
-.van-field__control{
-  font-size:0.186667rem;
+.van-icon.van-icon-clear {
+  display: block;
+  min-width: 1em;
+  font-size: 40px !important;
+  line-height: inherit;
+  color: #ccc;
+}
+.van-field__control {
+  font-size: 32px !important;
+}
+.van-search__action {
+  font-size: 32px !important;
 }
 </style>
