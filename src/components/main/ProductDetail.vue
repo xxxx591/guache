@@ -85,15 +85,15 @@ export default {
   async created() {
     var u = navigator.userAgent;
     var isAndroid = u.indexOf("Android") > -1 || u.indexOf("Adr") > -1;
-    if (isAndroid) {
-      console.log("token", this.$route.query.token);
-      // console.log('state',this.$store.state.datas.token);
-      let product = this.$route.params.product;
-      let productid = this.$route.query.productid;
-      this.$store.state.datas.token = this.$route.query.token;
-      this.getProductDetail(productid);
-      this.getUserInfo();
-    } else {
+    // if (isAndroid) {
+    //   console.log("token", this.$route.query.token);
+    //   // console.log('state',this.$store.state.datas.token);
+    //   let product = this.$route.params.product;
+    //   let productid = this.$route.query.productid;
+    //   this.$store.state.datas.token = this.$route.query.token;
+    //   this.getProductDetail(productid);
+    //   this.getUserInfo();
+    // } else {
       this.$store.state.datas.token = await this.native.getToken({});
       console.log(
         "this.$store.state.datas.token",
@@ -109,7 +109,7 @@ export default {
       console.log("productid---", productid);
       this.getProductDetail(productid);
       this.getUserInfo();
-    }
+    // }
   },
   methods: {
     // ...mapActions(["saveToken"]),
