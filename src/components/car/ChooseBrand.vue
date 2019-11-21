@@ -70,7 +70,7 @@ export default {
     },
     async getBrandProduct(id) {
       let token = await this.native.getToken({})
-      let list = await this.api.getBrandProducts({ token: token.token, page: 1, pagesize: 10000, vehicle_id: id })
+      let list = await this.api.getBrandProducts({  page: 1, pagesize: 10000, vehicle_id: id })
       this.productList = list.data.data
       console.log('getBrandProduct---', list.data.data)
 

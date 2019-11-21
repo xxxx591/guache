@@ -36,9 +36,9 @@
         <div class="comments-line"></div>
       </div>
     </div>
-    <div class="bottom">
+    <div class="bottom" :class="{'show-hidden': type == 1008}">
       <div class="bottom-box flex-h">
-        <div class="b-input flex-h" @click.stop="pinglun" :class="{'show-hidden': type == 1008}">请输入要评论的内容</div>
+        <div class="b-input flex-h" @click.stop="pinglun" >请输入要评论的内容</div>
         <div class="b-star" v-if="articleDetail.is_like==0">
           <img
             src="../../assets/undianzan.png"

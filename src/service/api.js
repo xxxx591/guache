@@ -37,6 +37,7 @@ let post = (url, params) => {
         }
         if (response.data.error_code == 1005) {
           console.log('我走到这里来啦');
+          native.back_btn({})
         }
         if (response.data.error_code == 1012) {
           response.data.error_msg = '订单号不存在'
@@ -160,7 +161,7 @@ api.getIndexRecommendProducts = obj => {
 }
 
 // F10 质造商品详情的接口
-api.quality_getProductDetail = obj => {
+api.quality_getProductDetailDetail = obj => {
   return new Promise(async (resolve, reject) => {
     let data = await post(`${config.url}/api/shops/goods/detail`, obj || {}, {
       headers: {

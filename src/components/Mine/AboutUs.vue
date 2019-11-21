@@ -7,9 +7,9 @@
     <div class="content" v-html="this.content"></div>
     <div class="box flex-v">
       <img src="../../assets/logo.png" class="b-logo">
-      <div class="b-title">挂车之家 v4.0.0</div>
-      <div class="b-phone">客服热线：400-0000-000</div>
-      <div class="b-email">客服邮箱：service@site.com</div>
+      <div class="b-title">挂车之家 v1.0.2</div>
+      <div class="b-phone">客服热线：400-0135-880</div>
+      <div class="b-email">客服邮箱：305139045@qq.com</div>
     </div>
     <div class="bottom">
       <div class="bo-box flex-v flex-cc">

@@ -42,7 +42,7 @@ export default {
   },
   methods: {
     async init(){
-      let data = await this.api.pageInfo({content_id:8})
+      let data = await this.api.pageInfo({content_id:7})
       this.content = data.data.content
       console.log('data',data.data.content);
       

@@ -228,6 +228,7 @@ native.gotoPointsMall = obj => {
   })
 }
 
+
 // 跳转到首页
 native.gotoHome = obj => {
   return new Promise((resolve, reject) => {

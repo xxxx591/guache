@@ -156,9 +156,8 @@ export default {
     },
     async getProductDetail(productid) {
       let token = await this.native.getToken({});
-      let data = await this.api.quality_getProductDetail({
+      let data = await this.api.quality_getProductDetailDetail({
         goods_id: productid,
-        token: token.token
       });
       this.productInfo = data.data;
     },
@@ -185,19 +184,22 @@ export default {
       }
     },
     waiter() {
-      (function(m, ei, q, i, a, j, s) {
-        m[i] =
-          m[i] ||
-          function() {
-            (m[i].a = m[i].a || []).push(arguments);
-          };
-        (j = ei.createElement(q)), (s = ei.getElementsByTagName(q)[0]);
-        j.async = true;
-        j.charset = "UTF-8";
-        j.src = "https://static.meiqia.com/dist/meiqia.js?_=t";
-        s.parentNode.insertBefore(j, s);
-      })(window, document, "script", "_MEIQIA");
-      window._MEIQIA("entId", 147235);
+      // (function(m, ei, q, i, a, j, s) {
+      //   m[i] =
+      //     m[i] ||
+      //     function() {
+      //       (m[i].a = m[i].a || []).push(arguments);
+      //     };
+      //   (j = ei.createElement(q)), (s = ei.getElementsByTagName(q)[0]);
+      //   j.async = true;
+      //   j.charset = "UTF-8";
+      //   j.src = "https://static.meiqia.com/dist/meiqia.js?_=t";
+      //   s.parentNode.insertBefore(j, s);
+      // })(window, document, "script", "_MEIQIA");
+      // window._MEIQIA("entId", 147235);
+      this.native.makeCall({
+        mobile: "4000135880"
+      });
     }
   }
 };

@@ -153,33 +153,39 @@ export default {
       console.log("this.$router.query----", this.$route.query);
       // let token = await this.native.getToken({})
       let detail = await this.api.secondCarDetail({
-        token: this.$store.state.datas.token,
         used_car_id: this.$route.query.productid
       });
       detail.data.content = decodeURIComponent(detail.data.content);
       this.carInfo = detail.data;
     },
     topBack() {
-      // this.native.back_btn({})
-      this.$router.back(-1);
+      console.log();
+      if (this.$route.query.type == "banner") {
+        this.native.back_btn({});
+      } else {
+        this.$router.back(-1);
+      }
     },
     async makeCall() {
       this.native.makeCall({ mobile: this.carInfo.mobile });
     },
     waiter() {
-      (function(m, ei, q, i, a, j, s) {
-        m[i] =
-          m[i] ||
-          function() {
-            (m[i].a = m[i].a || []).push(arguments);
-          };
-        (j = ei.createElement(q)), (s = ei.getElementsByTagName(q)[0]);
-        j.async = true;
-        j.charset = "UTF-8";
-        j.src = "https://static.meiqia.com/dist/meiqia.js?_=t";
-        s.parentNode.insertBefore(j, s);
-      })(window, document, "script", "_MEIQIA");
-      window._MEIQIA("entId", 147235);
+      // (function(m, ei, q, i, a, j, s) {
+      //   m[i] =
+      //     m[i] ||
+      //     function() {
+      //       (m[i].a = m[i].a || []).push(arguments);
+      //     };
+      //   (j = ei.createElement(q)), (s = ei.getElementsByTagName(q)[0]);
+      //   j.async = true;
+      //   j.charset = "UTF-8";
+      //   j.src = "https://static.meiqia.com/dist/meiqia.js?_=t";
+      //   s.parentNode.insertBefore(j, s);
+      // })(window, document, "script", "_MEIQIA");
+      // window._MEIQIA("entId", 147235);
+      this.native.makeCall({
+        mobile: "4000135880"
+      });
     },
     yaoqing() {
       this.show = true;
@@ -414,7 +420,7 @@ export default {
         width: 1rem /* 120/75 */;
         height: 1rem /* 120/75 */;
       }
-      span{
+      span {
         display: block;
       }
     }
