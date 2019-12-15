@@ -38,7 +38,7 @@
         <div class="b-left flex-h">
           <div class="b-txt flex-h">合计:</div>
           <div class="b-txt-price flex-h">{{sumPrice}}</div>
-          <div class="b-txt-txt flex-h">积分</div>
+          <div class="b-txt-txt flex-h">元</div>
         </div>
         <div class="b-right flex-h flex-cc" @click.stop="submitOrder">提交订单</div>
       </div>
@@ -78,7 +78,14 @@ export default {
     return {
       product: {},
       buyNum: 0,
-      addr: {},
+     addr: {
+        id: 0,
+        cnee: "请选择地址",
+        province: "",
+        city: "",
+        area: "",
+        address: ""
+      },
       userInfo: {},
       payFlag:false
     }
@@ -93,7 +100,7 @@ export default {
   created() {
    this.product = this.$store.state.productInfo;
     this.buyNum = this.$route.query.buyNum 
-    this.$store.stata.addr = this.addr
+    // this.$store.stata.addr = this.addr
     this.getDefaultAddr()
     this.getUserInfo()
   },
@@ -151,10 +158,22 @@ export default {
     async getDefaultAddr() {
       let token = await this.native.getToken({})
       let list = await this.api.addrList({ token: token.token, page: 1, pagesize: 1000 })
+      console.log('list',list);
       if (list.data && list.data.data) {
         list.data.data.forEach((addr, index) => {
           if (addr.often) {
             this.addr = addr
+            return
+          }else{
+            // addr.province + addr.city + addr.area + addr.address
+            this.addr = {
+          id: 0,
+          cnee: "请选择地址",
+          province:'',
+          city:'',
+          area:'',
+          address:''
+        };
           }
         })
       }

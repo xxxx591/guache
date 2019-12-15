@@ -1,13 +1,13 @@
 <template>
   <div class="ConfirmOrder">
     <div class="top">
-      <img src="../../assets/back-arrow.png" @click.stop="topBack" class="top-back">
+      <img src="../../assets/back-arrow.png" @click.stop="topBack" class="top-back" />
       <div class="top-txt">确认订单</div>
     </div>
     <div class="addr flex-h" @click.stop="$router.push({name: 'AddrManage', params: {}})">
       <div class="addr-left flex-h">
         <div class="addr-pos">
-          <img src="../../assets/pos.png" alt class="addr-pos-img">
+          <img src="../../assets/pos.png" alt class="addr-pos-img" />
         </div>
         <div class="addr-txt">
           <div class="addr-txt-name">{{addr.cnee}} {{addr.mobile}}</div>
@@ -19,12 +19,12 @@
         </div>
       </div>
       <div class="addr-right">
-        <img src="../../assets/right-arrow.png" class="addr-right-img">
+        <img src="../../assets/right-arrow.png" class="addr-right-img" />
       </div>
     </div>
     <div class="product flex-h">
       <div class="p-left">
-        <img :src="product.cover" alt class="p-img">
+        <img :src="product.cover" alt class="p-img" />
       </div>
       <div class="p-right flex-v">
         <div class="p-title">{{product.title}}</div>
@@ -50,11 +50,11 @@
       <van-dialog v-model="payFlag" show-cancel-button :show-confirm-button="false" class="pay-box">
         <div class="img-box">
           <p>
-            <img src="@/assets/zfb.png" alt srcset @click="payWay(2)">
+            <img src="@/assets/zfb.png" alt srcset @click="payWay(2)" />
           </p>
           <p class="line"></p>
           <p>
-            <img src="@/assets/wx.png" alt srcset @click="payWay(1)">
+            <img src="@/assets/wx.png" alt srcset @click="payWay(1)" />
           </p>
         </div>
       </van-dialog>
@@ -74,7 +74,14 @@ export default {
     return {
       product: {},
       buyNum: 0,
-      addr: {},
+      addr: {
+        id: 0,
+        cnee: "请选择地址",
+        province: "",
+        city: "",
+        area: "",
+        address: ""
+      },
       userInfo: {},
       payFlag: false,
       goods_order_id: "",
@@ -90,7 +97,10 @@ export default {
     this.token = await this.native.getToken({});
 
     if (this.$store.state.addr) {
-      this.addr = this.$store.state.addr == NaN ? {"id":0,"cnee":"请选择地址"} :  this.$store.state.addr;
+      this.addr =
+        this.$store.state.addr == NaN
+          ? { id: 0, cnee: "请选择地址" }
+          : this.$store.state.addr;
     } else {
       this.getDefaultAddr();
     }
@@ -172,7 +182,11 @@ export default {
       if (flag === false) {
         this.addr = {
           id: 0,
-          cnee: "请选择地址"
+          cnee: "请选择地址",
+          province: "",
+          city: "",
+          area: "",
+          address: ""
         };
         this.isAddressFlag = true;
       }

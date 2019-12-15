@@ -77,6 +77,7 @@ export default {
       window.scrollTo(0, 0);
     },
     changeTab(tabNum, item) {
+      console.log(item);
       this.currentTab=tabNum
       this.listIndex = tabNum;
       this.getCatList(item.id);
@@ -136,7 +137,25 @@ export default {
             console.log("data", data);
             if (data.error_code == 0) {
               console.log("de1!");
-              this.getCatList(this.listIndex);
+              let id = ''
+              switch (this.currentTab) {
+                case 0:
+                  id= '4'
+                  break;
+                case 1:
+                  id= '3'
+                  break;
+                case 2:
+                  id= '5'
+                  break;
+                case 3:
+                  id= '1'
+                  break;
+              
+                default:
+                  break;
+              }
+              this.getCatList(id);
               this.showCar = false;
               this.$nextTick(_ => {
                 this.showCar = true;
