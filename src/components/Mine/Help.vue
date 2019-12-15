@@ -5,11 +5,11 @@
       <div class="top-txt">帮助中心</div>
     </div>
     <div class="con flex-h">
-      <div class="con-left flex-v flex-cc" @click.stop="waiter">
+      <!-- <div class="con-left flex-v flex-cc" @click.stop="waiter">
         <img src="../../assets/contact.png" class="con-img">
         <div class="con-txt">在线客服</div>
-      </div>
-      <div class="con-right flex-v flex-cc">
+      </div> -->
+      <div class="con-right flex-v flex-cc"  @click.stop="waiter">
         <img src="../../assets/server.png" class="con-img">
         <div class="con-txt">客服热线</div>
       </div>
@@ -96,18 +96,21 @@ export default {
       // this.$router.back(-1)
     },
     waiter() {
-      (function (m, ei, q, i, a, j, s) {
-        m[i] = m[i] || function () {
-          (m[i].a = m[i].a || []).push(arguments)
-        };
-        j = ei.createElement(q),
-          s = ei.getElementsByTagName(q)[0];
-        j.async = true;
-        j.charset = 'UTF-8';
-        j.src = 'https://static.meiqia.com/dist/meiqia.js?_=t';
-        s.parentNode.insertBefore(j, s);
-      })(window, document, 'script', '_MEIQIA');
-      window._MEIQIA('entId', 147235);
+      // (function (m, ei, q, i, a, j, s) {
+      //   m[i] = m[i] || function () {
+      //     (m[i].a = m[i].a || []).push(arguments)
+      //   };
+      //   j = ei.createElement(q),
+      //     s = ei.getElementsByTagName(q)[0];
+      //   j.async = true;
+      //   j.charset = 'UTF-8';
+      //   j.src = 'https://static.meiqia.com/dist/meiqia.js?_=t';
+      //   s.parentNode.insertBefore(j, s);
+      // })(window, document, 'script', '_MEIQIA');
+      // window._MEIQIA('entId', 147235);
+      this.native.makeCall({
+        mobile: "4000135880"
+      });
     }
   }
 }

@@ -64,7 +64,7 @@ if (config.env === 0) {
       // f905c9d34bbb7d47b459fe420a70d042
       // of2j85_QmZ9g1kLHzaz6ZbNKEqKI
       // resolve({ token: 'c2740354f0d140193ed04185c66b6e8f' })
-      resolve({ token: 'bbefad312ce2397ee2425ec03bedf9d5' })
+      resolve({ token: '6264d7f1f2d7f9748f059c76e14d1a1f' })
     })
   }
 }

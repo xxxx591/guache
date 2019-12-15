@@ -228,4 +228,12 @@ export default {
 .van-search__action {
   font-size: 32px !important;
 }
+.QuanDetail-app-box{
+  background: #fff;
+  .content{
+    img{
+      width: 100%;
+    }
+  }
+}
 </style>

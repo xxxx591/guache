@@ -90,7 +90,7 @@ export default {
     this.token = await this.native.getToken({});
 
     if (this.$store.state.addr) {
-      this.addr = this.$store.state.addr;
+      this.addr = this.$store.state.addr == NaN ? {"id":0,"cnee":"请选择地址"} :  this.$store.state.addr;
     } else {
       this.getDefaultAddr();
     }

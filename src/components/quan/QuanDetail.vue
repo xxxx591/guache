@@ -1,5 +1,5 @@
 <template>
-  <div class="QuanDetail">
+  <div class="QuanDetail QuanDetail-app-box">
     <div class="top">
       <img src="../../assets/back-arrow.png" @click.stop="topBack" class="top-back" />
       <div class="top-txt">文章详情</div>
@@ -158,7 +158,7 @@ export default {
   computed: {
     ...mapState({
       // token: state => state.datas.token,
-    })
+    }),
   },
   watch: {
     isShowommentBox(val) {
@@ -231,8 +231,11 @@ export default {
         note_id: id,
         token: this.token
       });
-      detail.data.content = decodeURIComponent(detail.data.content);
+
+      // detail.data.content = decodeURIComponent(detail.data.content);
+      detail.data.content = `<div calss="QuanDetail-app-box-html">${detail.data.content}</div>`;
       this.articleDetail = detail.data;
+
       console.log("detail--", detail);
     },
     async getComments(id) {
