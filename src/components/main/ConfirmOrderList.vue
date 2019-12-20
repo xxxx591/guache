@@ -97,11 +97,15 @@ export default {
     }),
     ...mapGetters(['sumPrice'])
   },
-  created() {
+  mounted() {
    this.product = this.$store.state.productInfo;
     this.buyNum = this.$route.query.buyNum 
-    // this.$store.stata.addr = this.addr
-    this.getDefaultAddr()
+    if(this.$store.state.addr){
+      this.addr = this.$store.state.addr  
+    }else{
+      this.getDefaultAddr()
+    }
+
     this.getUserInfo()
   },
   methods: {
@@ -166,14 +170,14 @@ export default {
             return
           }else{
             // addr.province + addr.city + addr.area + addr.address
-            this.addr = {
-          id: 0,
-          cnee: "请选择地址",
-          province:'',
-          city:'',
-          area:'',
-          address:''
-        };
+        //     this.addr = {
+        //   id: 0,
+        //   cnee: "请选择地址",
+        //   province:'',
+        //   city:'',
+        //   area:'',
+        //   address:''
+        // };
           }
         })
       }

@@ -233,7 +233,7 @@ export default {
       });
 
       // detail.data.content = decodeURIComponent(detail.data.content);
-      detail.data.content = `<div calss="QuanDetail-app-box-html">${detail.data.content}</div>`;
+      detail.data.content = `<div calss="QuanDetail-app-box-html">${decodeURIComponent(detail.data.content)}</div>`;
       this.articleDetail = detail.data;
 
       console.log("detail--", detail);

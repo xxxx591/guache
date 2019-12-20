@@ -81,7 +81,7 @@ export default {
       this.getAllAddr()
     },
     chooseAddr(addr) { 
-       this.$store.state.addr= addr 
+       this.$store.state.addr = addr 
       console.log('addr---', this.$store.state.addr)
       this.$router.back(-1)
     },
